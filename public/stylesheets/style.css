@@ -18,6 +18,10 @@ header {
     font-size: 2.7em;
 }
 
+a .navbar-brand {
+    color: green;
+}
+
 body {
     font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
     padding-top: 70px;
