@@ -42,7 +42,16 @@ router.get('/signup', function(req, res, next) {
     });
 });
 
-router.post('/signup', passport.authenticate('local.signup', {
+router.post('/signup', function(req, res, next) {
+    if (req.body.passwordOld !== req.body.password) {
+        return res.render('user/signup', {
+            csrfToken: req.csrfToken(),
+            messages: ["Passwords do not match."],
+            hasErrors: true
+        });
+    }
+    next();
+}, passport.authenticate('local.signup', {
     successRedirect: '/user/profile',
     failureRedirect: '/user/signup',
     failureFlash: true

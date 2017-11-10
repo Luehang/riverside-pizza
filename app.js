@@ -1,23 +1,26 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var expressHbs = require('express-handlebars');
-var mongoose = require('mongoose');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const expressHbs = require('express-handlebars');
+const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const flash = require('connect-flash');
 const validator = require('express-validator');
 const MongoStore = require('connect-mongo')(session);
+const helmet = require('helmet');
 
 const routes = require('./routes/index');
 const userRoutes = require('./routes/user');
 
-var app = express();
+require('dotenv').config();
 
-mongoose.connect('mongodb://localhost/shopping', { useMongoClient: true });
+const app = express();
+
+mongoose.connect(process.env.DATABASE, { useMongoClient: true });
 const db = mongoose.connection;
 db.on("open", function(ref) {
   console.log("Connected to mongo server.");
@@ -32,6 +35,19 @@ require('./config/passport');
 app.engine('.hbs', expressHbs({defaultLayout: 'layout', extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
+app.use(helmet({
+    frameguard: {
+        action: 'deny'
+    },
+    hidePoweredBy: {
+        setTo: 'PHP 7.0.21'
+    },
+    xssFilter: {
+        setOnOldIE: true
+    },
+    ieNoOpen: true
+}));
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -40,7 +56,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(validator());
 app.use(cookieParser());
 app.use(session({
-  secret: 'strings', 
+  secret: process.env.SESSION_SECRET, 
   resave: false, 
   saveUninitialized: false,
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
@@ -62,7 +78,7 @@ app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });

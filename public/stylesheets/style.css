@@ -1,12 +1,47 @@
-.thumbnail img {
-    max-height: 150px;
+* {box-sizing:border-box}
+
+html {
+    background-color: rgb(247, 247, 247);
 }
 
-.thumbnail .description {
-    color: #7f7f7f;
+header {
+    font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
 }
 
-.price {
-    font-weight: bold;
-    font-size: 16px;
+.brand-title {
+    font-family: 'Pacifico', 'cursive', 'Brush Script MT';
+    font-size: 2.5em;
+    transition: transform 2s;
+}
+
+.brand-title:hover {
+    font-size: 2.7em;
+}
+
+body {
+    font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
+    padding-top: 70px;
+}
+
+.body-container {
+    min-height: 80vh;
+}
+
+h1 {
+    font-family: 'Russo One', 'Franklin Gothic Medium', 'Geneva';
+    color: rgb(46, 40, 40);
+}
+
+footer {
+    background: repeating-linear-gradient(to top left,
+    rgb(106, 207, 106), rgb(106, 207, 106) 5px, 
+    rgb(247, 247, 247) 5px, rgb(247, 247, 247) 10px);
+    min-height: 200px;
+    width: 100%;
+}
+
+footer {
+    font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
+    margin: 30px 0 0;
+    padding-top: 15px;
 }
