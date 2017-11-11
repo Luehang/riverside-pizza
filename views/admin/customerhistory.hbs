@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="/stylesheets/orderhistory.css">
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Customer Orders</h2>
+        <hr>
+        {{#if hasErrors}}
+            <div class="alert alert-danger">
+                {{# each messages }}
+                    <p>{{this}}</p>
+                {{/each}}
+            </div>
+        {{/if}}
+        {{# each orders }}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>{{ this.purchase_date }}</h4>
+                    <div class="info disable">
+                        <p>Customer Name: {{ first_name }} {{ last_name }}</p>
+                        <p>Address: {{address_line1}}, {{address_city}}, {{address_state}} {{address_zip}}</p>
+                        <ul class="list-group">
+                            {{# each this.items }}
+                                <li class="list-group-item">
+                                    <span class="badge">${{ this.price }}</span>
+                                    {{ this.item.title }} | {{ this.qty }}
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <strong>Total Price: ${{ this.cart.totalPrice }}</strong>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+
+<script type="text/javascript" src="{{__dirname}}/javascripts/orderhistory.js"></script>

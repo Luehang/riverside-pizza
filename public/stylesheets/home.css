@@ -1,0 +1,225 @@
+hr {
+    border-top: 1px solid rgb(213, 231, 214);
+}
+
+img {
+    border: 1px solid rgb(179, 216, 183);
+    box-shadow: inset 0 0 1.5em rgb(230, 230, 230), 0 0 2em rgb(228, 224, 224);
+    cursor: pointer;
+}
+
+img:hover {
+    opacity: 0.9;
+}
+
+h1 {
+    font-family: 'Russo One', 'Franklin Gothic Medium', 'Geneva';
+    color: rgb(46, 40, 40);
+    padding-left: 15px;
+}
+
+.deals-container {
+    position: relative;
+}
+
+.text-deals {
+    font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
+    color: rgb(133, 122, 122);
+    text-shadow: 0 0 5px rgb(185, 185, 185);
+    position: absolute;
+    width: 200px;
+    left: 50%;
+    margin-left: -100px;
+    top: 27%;
+    text-align: center;
+    font-size: 2em;
+    transition: transform 2s;
+    z-index: 2;
+}
+
+.text-deals span {
+    cursor: pointer;
+}
+
+.text-deals span:nth-child(1) {
+    color: rgb(87, 177, 64);
+}
+
+.text-deals span:nth-child(3) {
+    color: rgb(87, 177, 64);
+}
+
+.text-deals:hover {
+    transform: rotate(720deg);
+}
+
+.menu-container {
+    position: relative;
+}
+
+.text-menu {
+    font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
+    color: rgb(133, 122, 122);
+    text-shadow: 0 0 5px rgb(185, 185, 185);
+    position: absolute;
+    top: 15px;
+    margin-left: 15px;
+    font-size: 2em;
+    transition: transform 2s;
+    z-index: 2;
+}
+
+.text-menu span {
+    cursor: pointer;
+}
+
+.text-menu span:nth-child(2) {
+    color: rgb(87, 177, 64);
+    font-size: 1.3em;
+}
+
+.text-menu:hover span:nth-child(1) {
+    margin-left: 10px;
+}
+
+.text-menu:hover span:nth-child(2) {
+    margin-left: 20px;
+}
+
+.info-container {
+    text-align: center;
+    color: rgb(46, 40, 40);
+}
+
+.info-container h4 {
+    font-family: 'Russo One', 'Franklin Gothic Medium', 'Geneva';
+}
+
+.info-container p {
+    font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
+}
+
+.info-container a {
+    color: rgb(87, 177, 64);
+}
+
+/* Slideshow container ----------------------*/
+.slideshow-container {
+    font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
+    position: relative;
+}
+
+.slides {
+    display: none;
+}
+
+.dot-container {
+    position: absolute;
+    bottom: 4%;
+    width: 200px;
+    left: 50%;
+    margin-left: -100px;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: rgb(87, 177, 64);
+    opacity: 0.8;
+    font-weight: bold;
+    font-size: 30px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    text-decoration: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev {
+    left: 0;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+    text-decoration: none;
+    color: rgb(87, 177, 64);
+}
+
+/* Caption text */
+.text {
+    color: #242424;
+    font-size: 15px;
+    position: absolute;
+    /* padding: 8px 12px; */
+    /* width: 100%; */
+    text-align: center;
+    top: 3px;
+    width: 400px;
+    left: 50%;
+    margin-left: -200px;
+    z-index: 2;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #4d4d4d;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    opacity: 0.6;
+    border-radius: 50%;
+    display: inline-block;
+    transition: rgb(59, 161, 56) 0.6s ease;
+}
+
+.active, .dot:hover {
+    background-color: rgb(87, 177, 64);
+    opacity: 0.8;
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 3s;
+    animation-name: fade;
+    animation-duration: 3s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+
+/* media queries ---------------------------*/
+
+@media (max-width: 776px) {
+    .menu-container {
+        margin-top: 15px;
+    }
+}

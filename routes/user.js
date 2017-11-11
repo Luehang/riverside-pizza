@@ -25,16 +25,7 @@ router.use('/', notLoggedIn, function(req, res, next) {
 
 router.get('/signup', userController.getSignUpPage);
 
-router.post('/signup', function(req, res, next) {
-    if (req.body.passwordOld !== req.body.password) {
-        return res.render('user/signup', {
-            csrfToken: req.csrfToken(),
-            messages: ["Passwords do not match."],
-            hasErrors: true
-        });
-    }
-    next();
-}, passport.authenticate('local.signup', {
+router.post('/signup', passport.authenticate('local.signup', {
     successRedirect: '/user/profile',
     failureRedirect: '/user/signup',
     failureFlash: true
@@ -58,6 +49,8 @@ router.post('/signin', passport.authenticate('local.signin', {
         const oldUrl = req.session.oldUrl;
         req.session.oldUrl = null;
         res.redirect(oldUrl);
+    // } else if (req.user._id.toString() === process.env.ADMIN) {
+
     } else {
         res.redirect('/user/profile');
     }
@@ -74,6 +67,13 @@ function isLoggedIn(req, res, next) {
 
 function notLoggedIn(req, res, next) {
     if (!req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/');
+}
+
+function isAdmin(req, res, next) {
+    if (req.user._id.toString() === process.env.ADMIN) {
         return next();
     }
     res.redirect('/');

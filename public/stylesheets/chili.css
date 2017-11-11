@@ -1,0 +1,57 @@
+.thumbnail {
+    padding: 15px;
+    border: 1px solid rgb(179, 216, 183);
+    box-shadow: 0 0 2em rgb(228, 224, 224);
+}
+
+.thumbnail img {
+    max-height: 150px;
+    margin: 0 auto;
+}
+
+.thumbnail .description {
+    color: #7f7f7f;
+}
+
+h3 {
+    color: rgb(46, 40, 40);
+    margin-top: 0;
+}
+
+.caption {
+    font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
+}
+
+.styled-select {
+    margin-top: 30%;
+    background: url('/img/select-image.png') no-repeat 96% 0;
+    height: 29px;
+    overflow: hidden;
+    z-index: 2;
+    width: 100%;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border: 1px solid rgb(179, 216, 183);
+}
+
+select {
+    font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
+    color: rgb(46, 40, 40);
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    height: 29px;
+    padding: 5px; /* If you add too much padding here, the options won't show in IE */
+    width: 110%;
+    cursor: pointer;
+}
+
+.thumbnail button {
+    font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
+    margin-top: 5px;
+    width: 100%;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}

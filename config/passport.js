@@ -17,8 +17,14 @@ passport.use('local.signup', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, function(req, email, password, done) {
-    req.checkBody('email', 'Invalid email').notEmpty().isEmail();
-    req.checkBody('password', 'Invalid password').notEmpty().isLength({min: 5});
+    req.checkBody('email', 'Invalid email.').notEmpty().isEmail();
+    req.checkBody('password', 'Invalid password.').notEmpty();
+    req.checkBody('password', 'Password needs to be greater than 5 letters.').isLength({min: 5});
+    req.checkBody('password', 'Password must contain a number.').matches(/\d/);
+    req.checkBody('password', 'Password must contain a capitalized letter.').matches(/[A-Z]/);
+    req.checkBody('passwordConfirmation', 'Passwords do not match.')
+        .notEmpty()
+        .custom((value) => value === req.body.password);
     const errors = req.validationErrors();
     if (errors) {
         let messages = [];
@@ -52,7 +58,7 @@ passport.use('local.signin', new LocalStrategy({
     passReqToCallback: true
 }, function(req, email, password, done) {
     req.checkBody('email', 'Invalid email').notEmpty().isEmail();
-    req.checkBody('password', 'Invalid password').notEmpty().isLength({min: 4});
+    req.checkBody('password', 'Invalid password').notEmpty().isLength({min: 5});
     const errors = req.validationErrors();
     if (errors) {
         let messages = [];

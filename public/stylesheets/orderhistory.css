@@ -1,0 +1,33 @@
+hr {
+    border-top: 1px solid rgb(213, 231, 214);
+}
+
+li {
+    color: #7f7f7f;
+}
+
+.list-group-item {
+    border: 1px solid rgb(213, 231, 214);
+}
+
+.panel-body:hover {
+    background-color: rgb(230, 238, 230);
+    cursor: pointer;
+}
+
+.panel-footer {
+    border-top: 1px solid rgb(179, 216, 183);
+    background-color: rgb(230, 238, 230);
+}
+
+.panel {
+    border: 1px solid rgb(179, 216, 183);
+}
+
+.enable {
+    display: initial;
+}
+
+.disable {
+    display: none;
+}

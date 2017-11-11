@@ -48,9 +48,16 @@
                         <i class="fa fa-user" aria-hidden="true"></i> User Management <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        {{# if login }}
+                        {{# if admin }}
+                            <li><a href="/admin/profile">User Profile</a></li>
+                            <li><a href="/admin/customerhistory">Customer History</a></li>
+                            <li><a href="#">Customer Feedback</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/user/logout">Logout</a></li>
+                        {{ else if login }}
                             <li><a href="/user/profile">User Profile</a></li>
                             <li><a href="/user/orderhistory">Order History</a></li>
+                            <li><a href="#">Real-time Feedback</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/user/logout">Logout</a></li>
                         {{ else }}

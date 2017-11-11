@@ -15,6 +15,7 @@ const helmet = require('helmet');
 
 const routes = require('./routes/index');
 const userRoutes = require('./routes/user');
+const adminRoutes = require('./routes/admin');
 
 require('dotenv').config();
 
@@ -69,11 +70,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
   res.locals.login = req.isAuthenticated();
+  if (req.isAuthenticated()) {
+    res.locals.admin = req.user._id.toString() === process.env.ADMIN ? true : false;
+  }
   res.locals.session = req.session;
   next();
 });
 
 app.use('/user', userRoutes);
+app.use('/admin', adminRoutes);
 app.use('/', routes);
 
 // catch 404 and forward to error handler
