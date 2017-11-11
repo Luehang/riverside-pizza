@@ -1,28 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const csrf = require('csurf');
 const passport = require('passport');
+const csrf = require('csurf');
 
-const Order = require('../models/Order');
-const Cart = require('../models/Cart');
+const userController = require('../controllers/userController');
 
 const csrfProtection = csrf();
 router.use(csrfProtection);
 
-router.get('/profile', isLoggedIn, function(req, res, next) {
-    Order.find({user: req.user}, null, { $sort: -1 }, function(err, orders) {
-        if (err) {
-            return res.write('Error.');
-        }
-        orders = orders.reverse();
-        let cart;
-        orders.forEach(function(order) {
-            cart = new Cart(order.cart);
-            order.items = cart.generateArray();
-        });
-        res.render('user/profile', { orders: orders });
-    });
+router.get('/profile', isLoggedIn, (req, res, next) => {
+    res.render('user/profile');
 });
+
+router.get('/orderhistory', isLoggedIn, userController.getOrderHistoryPage);
 
 router.get('/logout', isLoggedIn, function (req, res, next) {
     req.logout();
@@ -33,14 +23,7 @@ router.use('/', notLoggedIn, function(req, res, next) {
     next();
 });
 
-router.get('/signup', function(req, res, next) {
-    const messages = req.flash('error');
-    res.render('user/signup', {
-        csrfToken: req.csrfToken(), 
-        messages: messages, 
-        hasErrors: messages.length > 0
-    });
-});
+router.get('/signup', userController.getSignUpPage);
 
 router.post('/signup', function(req, res, next) {
     if (req.body.passwordOld !== req.body.password) {
@@ -65,14 +48,7 @@ router.post('/signup', function(req, res, next) {
     }
 });
 
-router.get('/signin', function(req, res, next) {
-    const messages = req.flash('error');
-    res.render('user/signin', {
-        csrfToken: req.csrfToken(), 
-        messages: messages, 
-        hasErrors: messages.length > 0
-    });
-});
+router.get('/signin', userController.getSignInPage);
 
 router.post('/signin', passport.authenticate('local.signin', {
     failureRedirect: '/user/signin',
