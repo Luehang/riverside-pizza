@@ -1,8 +1,8 @@
-const express = require('express');
-const router = express.Router();
+const express               = require('express');
+const router                = express.Router();
 
-const menuController = require('../controllers/menuController');
-const shoppingController = require('../controllers/shoppingController');
+const menuController        = require('../controllers/menuController');
+const shoppingController    = require('../controllers/shoppingController');
 
 /* GET home page. */
 router.get('/', menuController.getHomePage);

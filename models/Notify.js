@@ -2,8 +2,7 @@ const mongoose              = require('mongoose');
 const { Schema }            = mongoose;
 mongoose.Promise            = require('bluebird');
 
-const profileSchema = new Schema({
-    imagePath: {type: String, default: 'img/dummy-image.png'},
+const notifySchema = new Schema({
     first_name: {type: String},
     last_name: {type: String},
     address_line1: {type: String},
@@ -12,6 +11,7 @@ const profileSchema = new Schema({
     address_state: {type: String},
     address_zip: {type: String},
     address_country: {type: String},
+    created_at: {type: Date, default: Date.now}
 });
 
-module.exports = mongoose.model('Profile', profileSchema);
+module.exports = mongoose.model('Notify', notifySchema);

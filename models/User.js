@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
-mongoose.Promise = require('bluebird');
-const bcrypt = require('bcrypt-nodejs');
+const mongoose              = require('mongoose');
+const { Schema }            = mongoose;
+mongoose.Promise            = require('bluebird');
+const bcrypt                = require('bcrypt-nodejs');
 
 const userSchema = new Schema({
     email: {type: String, required: true},

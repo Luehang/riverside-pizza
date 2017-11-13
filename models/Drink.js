@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-mongoose.Promise = require('bluebird');
+const mongoose              = require('mongoose');
+const Schema                = mongoose.Schema;
+mongoose.Promise            = require('bluebird');
 
 const drinkSchema = new Schema({
     imagePath: {type: String, default: "img/no-image.png"},

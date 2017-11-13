@@ -1,6 +1,6 @@
-const Product = require('../models/Product');
-const Chili = require('../models/Chili');
-const Drink = require('../models/Drink');
+const Product               = require('../models/Product');
+const Chili                 = require('../models/Chili');
+const Drink                 = require('../models/Drink');
 
 const menuController = {};
 

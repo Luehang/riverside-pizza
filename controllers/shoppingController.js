@@ -1,8 +1,8 @@
-const Product = require('../models/Product');
-const Chili = require('../models/Chili');
-const Drink = require('../models/Drink');
-const Cart = require('../models/Cart');
-const Order = require('../models/Order');
+const Product               = require('../models/Product');
+const Chili                 = require('../models/Chili');
+const Drink                 = require('../models/Drink');
+const Cart                  = require('../models/Cart');
+const Order                 = require('../models/Order');
 
 const shoppingController = {};
 
@@ -142,7 +142,9 @@ shoppingController.getShoppingCart = (req, res) => {
     const cart = new Cart(req.session.cart);
     res.render('shop/shopping-cart', {
         products: cart.generateArray(),
-        totalPrice: cart.totalPrice 
+        totalPrice: cart.totalPrice,
+        totalAfterTax: cart.totalAfterTax,
+        tax: cart.tax
     });
 }
 
@@ -153,7 +155,7 @@ shoppingController.getCheckOutPage = (req, res) => {
     const cart = new Cart(req.session.cart);
     let errMsg = req.flash('error')[0];
     res.render('shop/checkout', {
-        total: cart.totalPrice,
+        total: cart.totalAfterTax,
         errMsg: errMsg,
         noError: !errMsg
     });
@@ -169,7 +171,7 @@ shoppingController.postCheckOut = (req, res) => {
     );
     
     stripe.charges.create({
-        amount: cart.totalPrice * 100, // cents
+        amount: Number.parseFloat(cart.totalAfterTax) * 100, // cents
         currency: "usd",
         source: req.body.stripeToken, // obtained with Stripe.js
         description: "Test charge."
