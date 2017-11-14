@@ -4,6 +4,9 @@
     <div class="col-md-8 col-md-offset-2">
         <h2>Customer Orders</h2>
         <hr>
+        <div class="notify">
+            <audio class="notify-audio" src="/audio/itemize.mp3" type="audio/mp3" />
+        </div>
         {{#if hasErrors}}
             <div class="alert alert-danger">
                 {{# each messages }}
@@ -37,3 +40,20 @@
 </div>
 
 <script type="text/javascript" src="{{__dirname}}/javascripts/orderhistory.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+
+<script>
+    const admin = io('/admin');   
+    const $notify = $('.notify');
+    const $audio = $('.notify-audio');
+    let sound;
+    //sound = setInterval(() => {
+    //    $audio.trigger('play');
+    //}, 1700);
+    admin.on('notify show', (msg) => {
+        sound = setInterval(() => {
+            $audio.trigger('play');
+        }, 1700);
+        $notify.append(`<div class="alert alert-info" style="text-align: center"><h2>${msg}</h2></div>`);
+    });  
+</script>

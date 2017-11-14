@@ -1,6 +1,6 @@
 Stripe.setPublishableKey('pk_test_AhDwyxYOzXzwi6Nbo7fQrZXY');
 
-const socket = io('/admin');
+const admin = io('/admin');   
 const $number = $('#card-number');
 const $cvc = $('#card-cvc');
 const $exp_month = $('#card-expiry-month');
@@ -9,8 +9,6 @@ const $form = $('#checkout-form');
 
 $(document).ready(function() {
     $form.find('button').prop('disabled', true);
-
-    socket.emit('test', 'test');
 
     const validateForm = setInterval(function() {
         if ($number.val() !== "") {
@@ -56,6 +54,7 @@ $(document).ready(function() {
     $form.submit(function(event) {
         $('#charge-error').addClass('hidden');
         $form.find('button').prop('disabled', true);
+        admin.emit('order notify', 'New order.');
         Stripe.card.createToken({
             number: $number.val(),
             cvc: $cvc.val(),

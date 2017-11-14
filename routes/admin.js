@@ -2,7 +2,6 @@ const express               = require('express');
 const router                = express.Router();
 const passport              = require('passport');
 const csrf                  = require('csurf');
-const io                    = require('socket.io')(process.env.PORT);
 
 const adminController       = require('../controllers/adminController');
 
@@ -16,14 +15,6 @@ router.get('/profile', isLoggedIn, isAdmin, (req, res, next) => {
 router.get('/customerhistory', isLoggedIn, isAdmin, adminController.getCustomerHistory);
 
 module.exports = router;
-
-var notification = io
-    .of('/admin')
-    .on('connection', (socket) => {
-        socket.on('test', (data) => {
-            console.log(data);
-        });
-    });
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {

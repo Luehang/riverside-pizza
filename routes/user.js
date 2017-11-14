@@ -26,7 +26,7 @@ router.use('/', notLoggedIn, function(req, res, next) {
 router.get('/signup', userController.getSignUpPage);
 
 router.post('/signup', passport.authenticate('local.signup', {
-    successRedirect: '/user/profile',
+    successRedirect: '/user/orderhistory',
     failureRedirect: '/user/signup',
     failureFlash: true
 }), function(req, res, next) {
@@ -35,7 +35,7 @@ router.post('/signup', passport.authenticate('local.signup', {
         req.session.oldUrl = null;
         res.redirect(oldUrl);
     } else {
-        res.redirect('/user/profile');
+        res.redirect('/user/orderhistory');
     }
 });
 
@@ -49,10 +49,10 @@ router.post('/signin', passport.authenticate('local.signin', {
         const oldUrl = req.session.oldUrl;
         req.session.oldUrl = null;
         res.redirect(oldUrl);
-    // } else if (req.user._id.toString() === process.env.ADMIN) {
-
+    } else if (req.user._id.toString() === process.env.ADMIN) {
+        res.redirect('/admin/customerhistory');
     } else {
-        res.redirect('/user/profile');
+        res.redirect('/user/orderhistory');
     }
 });
 

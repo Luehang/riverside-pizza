@@ -4,6 +4,8 @@ const Drink                 = require('../models/Drink');
 const Cart                  = require('../models/Cart');
 const Order                 = require('../models/Order');
 
+const functionController    = require('./functionController');
+const nearestHundredths     = functionController.nearestHundredths;
 const shoppingController = {};
 
 shoppingController.addToCart = (req, res) => {
@@ -169,9 +171,12 @@ shoppingController.postCheckOut = (req, res) => {
     const stripe = require("stripe")(
         process.env.SECRET_KEY
     );
+
+    let totalNum = Number.parseFloat(cart.totalAfterTax) * 100;
+    totalNum = Number.parseFloat(nearestHundredths(totalNum));
     
     stripe.charges.create({
-        amount: Number.parseFloat(cart.totalAfterTax) * 100, // cents
+        amount: totalNum, // cents
         currency: "usd",
         source: req.body.stripeToken, // obtained with Stripe.js
         description: "Test charge."
