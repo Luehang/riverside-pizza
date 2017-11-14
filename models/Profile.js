@@ -3,7 +3,8 @@ const { Schema }            = mongoose;
 mongoose.Promise            = require('bluebird');
 
 const profileSchema = new Schema({
-    imagePath: {type: String, default: 'img/dummy-image.png'},
+    user: {type: Schema.Types.ObjectId, ref: 'User'},
+    // imagePath: {type: String, default: 'img/dummy-image.png'},
     first_name: {type: String},
     last_name: {type: String},
     address_line1: {type: String},

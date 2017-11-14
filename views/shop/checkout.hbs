@@ -12,7 +12,70 @@
             {{errMsg}}
         </div>
         <form action="/checkout" method="post" id="checkout-form">
-            <div class="row">
+            {{#if userInfo }}
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="first-name">First Name<span>*</span></label>
+                        <input value="{{userInfo.first_name}}" type="text" id="first-name" name="firstName" class="form-control" autocomplete="given-name" required>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="last-name">Last Name<span>*</span></label>
+                        <input value="{{userInfo.last_name}}" type="text" id="last-name" name="lastName" class="form-control" autocomplete="family-name" required>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="address1">Address 1<span>*</span></label>
+                        <input value="{{userInfo.address_line1}}" type="text" id="address1" name="address1" class="form-control" autocomplete="street-address" required>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="address2">Address 2</label>
+                        <input value="{{userInfo.address_line2}}" type="text" id="address2" name="address2" class="form-control"  autocomplete="on">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="address-city">City<span>*</span></label>
+                                <input value="{{userInfo.address_city}}" type="text" id="address-city" name="city" class="form-control" autocomplete="address-level2" required>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="address-state">State<span>*</span></label>
+                                <input value="{{userInfo.address_state}}" type="text" id="address-state" name="state" class="form-control" autocomplete="address-level1" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="address-country">Country<span>*</span></label>
+                                <input value="{{userInfo.address_country}}" type="text" id="address-country" name="country" class="form-control" autocomplete="country-name" required>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="address-zip">Zip Code<span>*</span></label>
+                                <input value="{{userInfo.address_zip}}" type="text" id="address-zip" name="zip" class="form-control" autocomplete="postal-code" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <input type="checkbox" id="update-info" name="updateInfo" value="update">
+                        <label for="update-info">Update Information?</label>
+                    </div>
+                </div>
+            {{else}}
                 <div class="col-xs-12">
                     <div class="form-group">
                         <label for="first-name">First Name<span>*</span></label>
@@ -69,43 +132,49 @@
                         </div>
                     </div>
                 </div>
-                <hr>
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <label for="card-name">Card Holder's Name<span>*</span></label>
-                        <input type="text" id="card-name" class="form-control" autocomplete="cc-name" required>
+                        <input type="checkbox" id="save-info" name="saveInfo" value="save">
+                        <label for="save-info">Save Information For Later?</label>
                     </div>
                 </div>
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="card-number">Credit Card Number<span>*</span></label>
-                        <input type="text" id="card-number" class="form-control" autocomplete="cc-number" required>
-                    </div>
+            {{/if}}
+            <hr>
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="card-name">Card Holder's Name<span>*</span></label>
+                    <input type="text" id="card-name" class="form-control" autocomplete="cc-name" required>
                 </div>
-                <div class="col-xs-12">
-                    <div id="card-type" class="alert alert-info hidden"></div>
+            </div>
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="card-number">Credit Card Number<span>*</span></label>
+                    <input type="text" id="card-number" class="form-control" autocomplete="cc-number" required>
                 </div>
-                <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="card-expiry-month">Expiration Month<span>*</span></label>
-                                <input type="text" id="card-expiry-month" class="form-control" autocomplete="cc-exp-month" required>
-                            </div>
+            </div>
+            <div class="col-xs-12">
+                <div id="card-type" class="alert alert-info hidden"></div>
+            </div>
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="card-expiry-month">Expiration Month<span>*</span></label>
+                            <input type="text" id="card-expiry-month" class="form-control" autocomplete="cc-exp-month" required>
                         </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="card-expiry-year">Expiration Year<span>*</span></label>
-                                <input type="text" id="card-expiry-year" class="form-control" autocomplete="cc-exp-year" required>
-                            </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="card-expiry-year">Expiration Year<span>*</span></label>
+                            <input type="text" id="card-expiry-year" class="form-control" autocomplete="cc-exp-year" required>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="card-cvc">CVC<span>*</span></label>
-                        <input type="text" id="card-cvc" class="form-control" autocomplete="cc-csc" required>
-                    </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="card-cvc">CVC<span>*</span></label>
+                    <input type="text" id="card-cvc" class="form-control" autocomplete="cc-csc" required>
                 </div>
             </div>
             <button type="submit" class="btn btn-success">Buy Now</button>

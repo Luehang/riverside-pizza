@@ -38,7 +38,9 @@ router.get('/shopping-cart', shoppingController.getShoppingCart);
 
 router.get('/checkout', isLoggedIn, shoppingController.getCheckOutPage);
 
-router.post('/checkout', isLoggedIn, shoppingController.postCheckOut);
+router.post('/checkout', 
+    isLoggedIn, 
+    shoppingController.postCheckOut);
 
 module.exports = router;
 

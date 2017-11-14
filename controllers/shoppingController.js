@@ -3,6 +3,7 @@ const Chili                 = require('../models/Chili');
 const Drink                 = require('../models/Drink');
 const Cart                  = require('../models/Cart');
 const Order                 = require('../models/Order');
+const Profile               = require('../models/Profile');
 
 const functionController    = require('./functionController');
 const nearestHundredths     = functionController.nearestHundredths;
@@ -156,22 +157,84 @@ shoppingController.getCheckOutPage = (req, res) => {
     }
     const cart = new Cart(req.session.cart);
     let errMsg = req.flash('error')[0];
-    res.render('shop/checkout', {
-        total: cart.totalAfterTax,
-        errMsg: errMsg,
-        noError: !errMsg
+    Profile.findOne({user: req.user}, (err, results) => {
+        res.render('shop/checkout', {
+            total: cart.totalAfterTax,
+            userInfo: results,
+            errMsg: errMsg,
+            noError: !errMsg
+        });
     });
 }
 
+// shoppingController.middleCheckOut = (req, res, next) => {
+//     if (!req.session.cart) {
+//         return res.redirect('/shopping-cart');
+//     }
+//     if (req.body.saveInfo === "save") {
+//         Profile.findByIdAndUpdate(req.user._id, { $set: {
+//             user: req.user,
+//             first_name: req.body.firstName,
+//             last_name: req.body.lastName,
+//             address_line1: req.body.address1,
+//             address_line2: req.body.address2,
+//             address_city: req.body.city,
+//             address_state: req.body.state,
+//             address_zip: req.body.zip,
+//             address_country: req.body.country
+//         }}, {upsert: true}, (err, profile) => {
+//             next();
+//         });
+//         // const profile = new Profile({
+//         //     user: req.user,
+//         //     first_name: req.body.firstName,
+//         //     last_name: req.body.lastName,
+//         //     address_line1: req.body.address1,
+//         //     paymentId: charge.id,
+//         //     address_line2: req.body.address2,
+//         //     address_city: req.body.city,
+//         //     address_state: req.body.state,
+//         //     address_zip: req.body.zip,
+//         //     address_country: req.body.country
+//         // });
+//         // profile.save((err, result) => {
+//         //     next();
+//         // });
+//     }
+//     if (req.body.updateInfo === "update" || req.body.saveInfo === "save") {
+//         Profile.findByIdAndUpdate(req.user._id, { $set: {
+//             user: req.user,
+//             first_name: req.body.firstName,
+//             last_name: req.body.lastName,
+//             address_line1: req.body.address1,
+//             address_line2: req.body.address2,
+//             address_city: req.body.city,
+//             address_state: req.body.state,
+//             address_zip: req.body.zip,
+//             address_country: req.body.country
+//         }}, {upsert: true}, (err, profile) => {
+//             next();
+//         });
+//     }
+//     next();
+// }
+
 shoppingController.postCheckOut = (req, res) => {
-    if (!req.session.cart) {
-        return res.redirect('/shopping-cart');
-    }
+    const {
+        firstName,
+        lastName,
+        address1,
+        address2,
+        city,
+        state,
+        zip,
+        country
+    } = req.body;
     const cart = new Cart(req.session.cart);
     const stripe = require("stripe")(
         process.env.SECRET_KEY
     );
-
+    
     let totalNum = Number.parseFloat(cart.totalAfterTax) * 100;
     totalNum = Number.parseFloat(nearestHundredths(totalNum));
     
@@ -189,16 +252,33 @@ shoppingController.postCheckOut = (req, res) => {
         const order = new Order({
             user: req.user,
             cart: cart,
-            first_name: req.body.firstName,
-            last_name: req.body.lastName,
-            address_line1: req.body.address1,
+            first_name: firstName,
+            last_name: lastName,
+            address_line1: address1,
             paymentId: charge.id,
-            address_line2: req.body.address2,
-            address_city: req.body.city,
-            address_state: req.body.state,
-            address_zip: req.body.zip,
-            address_country: req.body.country
+            address_line2: address2,
+            address_city: city,
+            address_state: state,
+            address_zip: zip,
+            address_country: country
         });
+        if (req.body.updateInfo === "update" || req.body.saveInfo === "save") {
+            Profile.update({user: req.user._id}, { $set: {
+                user: req.user,
+                first_name: firstName,
+                last_name: lastName,
+                address_line1: address1,
+                address_line2: address2,
+                address_city: city,
+                address_state: state,
+                address_zip: zip,
+                address_country: country
+            }}, {upsert: true, new: true}, (err, profile) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
+        }
         order.save(function(err, result) {
             if (err) {
                 req.flash('error', err.message);
@@ -206,7 +286,7 @@ shoppingController.postCheckOut = (req, res) => {
             }
             req.flash('success', 'Payment successful.  Please come pick up in 15-30 mins.');
             req.session.cart = null;
-            res.redirect('/');
+            return res.redirect('/');
         });
     });
 }
