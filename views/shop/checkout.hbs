@@ -11,6 +11,7 @@
         <div id="charge-error" class="alert alert-danger {{#if noError}}hidden{{/if}}">
             {{errMsg}}
         </div>
+        <hr>
         <form action="/checkout" method="post" id="checkout-form">
             {{#if userInfo }}
                 <div class="col-xs-12">
@@ -139,7 +140,6 @@
                     </div>
                 </div>
             {{/if}}
-            <hr>
             <div class="col-xs-12">
                 <div class="form-group">
                     <label for="card-name">Card Holder's Name<span>*</span></label>
@@ -178,6 +178,10 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-success">Buy Now</button>
+        </form>
+        <hr>
+        <form id="back-form" action="/shopping-cart" method="GET">
+            <button type="submit" class="btn btn-danger">Back</button>
         </form>
     </div>
 </div>
