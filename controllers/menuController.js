@@ -1,22 +1,26 @@
 const Product               = require('../models/Product');
 const Chili                 = require('../models/Chili');
 const Drink                 = require('../models/Drink');
+const Profile               = require('../models/Profile');
 
 const menuController = {};
 
 menuController.getHomePage = (req, res) => {
+    const messages = req.flash('error');
     const successMsg = req.flash('success')[0];
-    Product.find(function(err, docs) {
-        let productChunks = [];
-        let chunkSize = 3;
-        for (var i = 0; i < docs.length; i += chunkSize) {
-            productChunks.push(docs.slice(i, i + chunkSize));
-        }
+    Profile.findOne({'user': req.user}, (err, result) => {
+        let name = null;
+        let email = null;
+        if (result) name = result.first_name;
+        if (req.user) email = req.user.email;
         res.render('shop/index', { 
-            title: 'Shopping Cart', 
-            products: productChunks,
+            title: 'Home', 
+            name: name,
+            email: email,
             successMsg: successMsg,
-            noMessages: !successMsg
+            noMessages: !successMsg,
+            messages: messages, 
+            hasErrors: messages.length > 0
         });
     });
 }

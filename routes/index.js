@@ -7,6 +7,10 @@ const shoppingController    = require('../controllers/shoppingController');
 /* GET home page. */
 router.get('/', menuController.getHomePage);
 
+router.get('/deals', (req, res) => {
+    
+})
+
 router.get('/pizza', menuController.getPizzaPage);
 
 router.get('/chili', menuController.getChiliPage);

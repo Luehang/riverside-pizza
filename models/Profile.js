@@ -13,6 +13,8 @@ const profileSchema = new Schema({
     address_state: {type: String},
     address_zip: {type: String},
     address_country: {type: String},
+    created_at: {type: Date, default: Date.now},
+    is_deleted: {type: String, default: false}
 });
 
 module.exports = mongoose.model('Profile', profileSchema);

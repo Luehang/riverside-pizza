@@ -144,6 +144,7 @@ shoppingController.getShoppingCart = (req, res) => {
     }
     const cart = new Cart(req.session.cart);
     res.render('shop/shopping-cart', {
+        title: 'Cart',
         products: cart.generateArray(),
         totalPrice: cart.totalPrice,
         totalAfterTax: cart.totalAfterTax,
@@ -159,6 +160,7 @@ shoppingController.getCheckOutPage = (req, res) => {
     let errMsg = req.flash('error')[0];
     Profile.findOne({user: req.user}, (err, results) => {
         res.render('shop/checkout', {
+            title: 'Check Out',
             total: cart.totalAfterTax,
             userInfo: results,
             errMsg: errMsg,
@@ -166,58 +168,6 @@ shoppingController.getCheckOutPage = (req, res) => {
         });
     });
 }
-
-// shoppingController.middleCheckOut = (req, res, next) => {
-//     if (!req.session.cart) {
-//         return res.redirect('/shopping-cart');
-//     }
-//     if (req.body.saveInfo === "save") {
-//         Profile.findByIdAndUpdate(req.user._id, { $set: {
-//             user: req.user,
-//             first_name: req.body.firstName,
-//             last_name: req.body.lastName,
-//             address_line1: req.body.address1,
-//             address_line2: req.body.address2,
-//             address_city: req.body.city,
-//             address_state: req.body.state,
-//             address_zip: req.body.zip,
-//             address_country: req.body.country
-//         }}, {upsert: true}, (err, profile) => {
-//             next();
-//         });
-//         // const profile = new Profile({
-//         //     user: req.user,
-//         //     first_name: req.body.firstName,
-//         //     last_name: req.body.lastName,
-//         //     address_line1: req.body.address1,
-//         //     paymentId: charge.id,
-//         //     address_line2: req.body.address2,
-//         //     address_city: req.body.city,
-//         //     address_state: req.body.state,
-//         //     address_zip: req.body.zip,
-//         //     address_country: req.body.country
-//         // });
-//         // profile.save((err, result) => {
-//         //     next();
-//         // });
-//     }
-//     if (req.body.updateInfo === "update" || req.body.saveInfo === "save") {
-//         Profile.findByIdAndUpdate(req.user._id, { $set: {
-//             user: req.user,
-//             first_name: req.body.firstName,
-//             last_name: req.body.lastName,
-//             address_line1: req.body.address1,
-//             address_line2: req.body.address2,
-//             address_city: req.body.city,
-//             address_state: req.body.state,
-//             address_zip: req.body.zip,
-//             address_country: req.body.country
-//         }}, {upsert: true}, (err, profile) => {
-//             next();
-//         });
-//     }
-//     next();
-// }
 
 shoppingController.postCheckOut = (req, res) => {
     const {
@@ -275,7 +225,7 @@ shoppingController.postCheckOut = (req, res) => {
                 address_country: country
             }}, {upsert: true, new: true}, (err, profile) => {
                 if (err) {
-                    console.log(err);
+                    req.flash('error', err.message);
                 }
             });
         }

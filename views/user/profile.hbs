@@ -1,6 +1,183 @@
+<style>
+    .description span {
+        color: red;
+    }
+    #change-password-form {
+        display: inline-block;
+    }
+    #delete-form {
+        display: inline-block;
+    }
+    #profile-form {
+        display: none;
+    }
+</style>
+
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <h1>User Profile</h1>
+        <h3>User Profile</h3>
         <hr>
+        <div id="success" class="alert alert-success {{#if noMessages}}hidden{{/if}}">
+            {{ successMsg }}
+        </div>
+        {{#if hasErrors}}
+            <div class="alert alert-danger">
+                {{# each messages }}
+                    <p>{{this}}</p>
+                {{/each}}
+            </div>
+        {{/if}}
+        <p class="description"><span>*</span>The information is private and will only be use for quick check out.</p>
+        <div id="profile-data">
+            <p>User: {{email}}</p>
+            <p>Full Name: {{userInfo.first_name}} {{userInfo.last_name}}</p>
+            <p>Address: {{userInfo.address_line1}} {{userInfo.address_city}} {{userInfo.address_state}} {{userInfo.address_country}} {{userInfo.address_zip}}</p>
+            <button id="edit" type="submit" class="btn btn-primary">Edit Info.</button>
+            <form action="/user/change-password" method="POST" id="change-password-form">
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                <button type="submit" class="btn btn-success">Change Pass.</button>
+            </form>
+            <form action="/user/delete-account" method="POST" id="delete-form">
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                <button type="submit" class="btn btn-danger">Delete Account</button>
+            </form>
+        </div>
+        <form action="/user/updateprofiledetail" method="POST" id="profile-form">
+            {{#if userInfo }}
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input value="{{userInfo.first_name}}" type="text" id="first-name" name="firstName" class="form-control" autocomplete="given-name">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input value="{{userInfo.last_name}}" type="text" id="last-name" name="lastName" class="form-control" autocomplete="family-name">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="address1">Address 1</label>
+                        <input value="{{userInfo.address_line1}}" type="text" id="address1" name="address1" class="form-control" autocomplete="street-address">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="address2">Address 2</label>
+                        <input value="{{userInfo.address_line2}}" type="text" id="address2" name="address2" class="form-control"  autocomplete="on">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="address-city">City</label>
+                                <input value="{{userInfo.address_city}}" type="text" id="address-city" name="city" class="form-control" autocomplete="address-level2">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="address-state">State</label>
+                                <input value="{{userInfo.address_state}}" type="text" id="address-state" name="state" class="form-control" autocomplete="address-level1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="address-country">Country</label>
+                                <input value="{{userInfo.address_country}}" type="text" id="address-country" name="country" class="form-control" autocomplete="country-name">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="address-zip">Zip Code</label>
+                                <input value="{{userInfo.address_zip}}" type="text" id="address-zip" name="zip" class="form-control" autocomplete="postal-code">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{else}}
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="firstName" class="form-control" autocomplete="given-name">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="lastName" class="form-control" autocomplete="family-name">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="address1">Address 1</label>
+                        <input type="text" id="address1" name="address1" class="form-control" autocomplete="street-address">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="address2">Address 2</label>
+                        <input type="text" id="address2" name="address2" class="form-control"  autocomplete="on">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="address-city">City</label>
+                                <input type="text" id="address-city" name="city" class="form-control" autocomplete="address-level2">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="address-state">State</label>
+                                <input type="text" id="address-state" name="state" class="form-control" autocomplete="address-level1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="address-country">Country</label>
+                                <input type="text" id="address-country" name="country" class="form-control" autocomplete="country-name">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="address-zip">Zip Code</label>
+                                <input type="text" id="address-zip" name="zip" class="form-control" autocomplete="postal-code">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+            <button type="submit" class="btn btn-success">Update</button>
+            <button type="submit" class="btn btn-danger" formaction="/user/profile" formmethod="GET">Cancel</button>
+        </form>
     </div>
 </div>
+
+<script>
+    const $editBtn = $('#edit');
+    const $profileData = $('#profile-data');
+    const $profileForm = $('#profile-form');
+    const $closeBtn = $('#close');
+
+    $editBtn.click(() => {
+        $profileData.hide();
+        $profileForm.show();
+    });
+
+    $profileForm.submit(() => {
+        $profileForm.hide();
+        $profileData.show();
+    });
+</script>

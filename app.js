@@ -12,6 +12,7 @@ const flash                 = require('connect-flash');
 const validator             = require('express-validator');
 const MongoStore            = require('connect-mongo')(session);
 const helmet                = require('helmet');
+const methodOverride        = require('method-override');
 
 const routes                = require('./routes/index');
 const userRoutes            = require('./routes/user');
@@ -76,6 +77,8 @@ app.use(function(req, res, next) {
   res.locals.session = req.session;
   next();
 });
+
+app.use(methodOverride('_method'));
 
 app.use('/user', userRoutes);
 app.use('/admin', adminRoutes);

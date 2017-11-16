@@ -1,0 +1,104 @@
+<link rel="stylesheet" href="/stylesheets/orderhistory.css">
+
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h3>{{email}}'s Profile</h3>
+        <hr>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h4>Details</h4>
+                <ul class="list-group">
+                    {{#if profile}}
+                        <li class="list-group-item">
+                            <span class="badge"></span>
+                            Full Name: {{profile.first_name}} {{profile.last_name}}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge"></span>
+                            Address: {{profile.address_line1}} {{profile.address_city}} {{profile.address_state}} {{profile.address_country}} {{profile.address_zip}}
+                        </li>
+                    {{else}}
+                        <li class="list-group-item">
+                            <span class="badge"></span>
+                            NO PROFILE
+                        </li>
+                    {{/if}} 
+                    {{#if ordersQty}}
+                        <li class="list-group-item">
+                            <span class="badge">${{totalBeforeTax}}</span>
+                            Total amount before tax for {{ordersQty}} out of 30 orders showing.
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge">${{totalTax}}</span>
+                            Total tax for {{ordersQty}} out of 30 orders showing.
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge">${{totalAfterTax}}</span>
+                            Total amount after tax for {{ordersQty}} out of 30 orders showing.
+                        </li>
+                    {{else}}
+                        <li class="list-group-item">
+                            <span class="badge">$0</span>
+                            NO ORDERS.
+                        </li>
+                    {{/if}}
+                    
+                </ul>
+            </div>
+            <div class="panel-footer">
+                <form action="/admin/user-accounts" method="GET">
+                    <button type="submit" class="btn btn-success">
+                        Back
+                    </button>
+                </form>
+            </div>
+        </div>
+        <h3>{{email}}'s Orders</h3>
+        <hr>
+        {{#if orders}}
+            {{# each orders }}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4>{{ this.purchase_date }}</h4>
+                        <div class="info">
+                            <p>Customer Name: {{ first_name }} {{ last_name }}</p>
+                            <p>Address: {{address_line1}}, {{address_city}}, {{address_state}} {{address_zip}}</p>
+                            <ul class="list-group">
+                                {{# each this.items }}
+                                    <li class="list-group-item">
+                                        <span class="badge">${{ this.price }}</span>
+                                        {{ this.item.title }} | {{ this.qty }}
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <strong>Total: <span>${{ this.cart.totalPrice }}</span></strong><br>
+                        <strong>Tax: ${{ this.cart.tax }}</strong><br>
+                        <strong>Total After Tax: ${{ this.cart.totalAfterTax }}</strong>
+                    </div>
+                </div>
+            {{/each}}
+        {{else}}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>NO ORDERS TO SHOW RIGHT NOW</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            NO ITEMS
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                </div>
+            </div>
+        {{/if}}
+        <form action="/admin/user-accounts" method="GET">
+            <button type="submit" class="btn btn-success">
+                Back
+            </button>
+        </form>
+    </div>
+</div>

@@ -2,6 +2,10 @@ hr {
     border-top: 1px solid rgb(213, 231, 214);
 }
 
+.name-header h3 {
+    text-align: center;
+}
+
 img {
     border: 1px solid rgb(179, 216, 183);
     box-shadow: inset 0 0 1.5em rgb(230, 230, 230), 0 0 2em rgb(228, 224, 224);

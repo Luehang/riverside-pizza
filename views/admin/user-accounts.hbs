@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="/stylesheets/orderhistory.css">
+
+<div id="success" class="alert alert-success {{#if noMessages}}hidden{{/if}}">
+    {{ successMsg }}
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h4>Users</h4>
+                <ul class="list-group">
+                    {{# each users }}
+                        <li class="list-group-item">
+                                <span style="color: rgb(46, 40, 40)">{{ this.email }}</span> | {{ this.created_at }}
+                            <div style="block">
+                                <form action="/admin/user-accounts/{{this._id}}" method="GET" style="display: inline-block">
+                                    <input type="hidden" name="user" value="{{this.email}}">
+                                    <button type="submit" class="btn btn-success btn-xs">Profile/Orders</button>
+                                </form>
+                                <form action="/admin/user-accounts/recover" method="GET" style="display: inline-block">
+                                    <input type="hidden" name="user" value="{{this.email}}">
+                                    <button type="submit" class="btn btn-primary btn-xs">Recover</button>
+                                </form>
+                                <form action="/admin/user-accounts/delete/temp" method="GET" style="display: inline-block">
+                                    <input type="hidden" name="user" value="{{this.email}}">
+                                    <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+                                </form>
+                            </div>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="panel-footer">
+                <strong></strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h4>Deleted Users</h4>
+                <ul class="list-group">
+                    {{# each deletedUsers }}
+                        <li class="list-group-item">
+                            <span style="color: rgb(46, 40, 40)">{{ this.email }}</span> | {{ this.created_at }}
+                            <div style="block">
+                                <form action="/admin/user-accounts/recover" method="GET" style="display: inline-block">
+                                    <input type="hidden" name="user" value="{{this.email}}">
+                                    <button type="submit" class="btn btn-primary btn-xs">Recover</button>
+                                </form>
+                                <form action="/admin/user-accounts/{{this._id}}" method="GET" style="display: inline-block">
+                                    <input type="hidden" name="user" value="{{this.email}}">
+                                    <button type="submit" class="btn btn-success btn-xs">Profile/Orders</button>
+                                </form>
+                                <form action="/admin/user-accounts/delete/perm/user?" method="GET" style="display: inline-block">
+                                    <input type="hidden" name="user" value="{{this.email}}">
+                                    <button type="submit" class="btn btn-danger btn-xs">Delete User</button>
+                                </form>
+                            </div>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="panel-footer">
+                <strong></strong>
+            </div>
+        </div>
+    </div>
+</div>

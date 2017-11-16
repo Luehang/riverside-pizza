@@ -1,5 +1,6 @@
 const passport              = require('passport');
 const LocalStrategy         = require('passport-local').Strategy;
+const bcrypt                = require('bcrypt-nodejs');
 
 const User                  = require('../models/user');
 
@@ -24,7 +25,6 @@ passport.use('local.signup', new LocalStrategy({
     req.checkBody('password', 'Password must contain a number.').matches(/\d/);
     req.checkBody('password', 'Password must contain a capitalized letter.').matches(/[A-Z]/);
     req.checkBody('passwordConfirmation', 'Passwords do not match.')
-        .notEmpty()
         .custom((value) => value === req.body.password);
     const errors = req.validationErrors();
     if (errors) {
@@ -68,7 +68,7 @@ passport.use('local.signin', new LocalStrategy({
         });
         return done(null, false, req.flash('error', messages));
     }
-    User.findOne({'email': email}, function (err, user) {
+    User.findOne({'email': email, 'is_deleted': false}, function (err, user) {
         if (err) {
             return done(err);
         }

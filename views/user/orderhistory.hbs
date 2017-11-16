@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <h2>My Orders</h2>
+        <h3>My Orders</h3>
         <hr>
         {{#if hasErrors}}
             <div class="alert alert-danger">
@@ -25,7 +25,9 @@
                     </ul>
                 </div>
                 <div class="panel-footer">
-                    <strong>Total Price: ${{ this.cart.totalPrice }}</strong>
+                    <strong>Total: <span>${{ this.cart.totalPrice }}</span></strong><br>
+                    <strong>Tax: ${{ this.cart.tax }}</strong><br>
+                    <strong>Total After Tax: ${{ this.cart.totalAfterTax }}</strong>
                 </div>
             </div>
         {{/each}}
