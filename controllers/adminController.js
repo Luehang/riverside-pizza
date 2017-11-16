@@ -161,6 +161,16 @@ adminController.getUserAccountsDeleteTempPage = (req, res) => {
 }
 
 adminController.deleteUserAccountTemp = (req, res) => {
+    req.checkBody('userEmail', 'Invalid user email.').notEmpty().isEmail();
+    const errors = req.validationErrors();
+    if (errors) {
+        let messages = [];
+        errors.forEach(function(error) {
+            messages.push(error.msg);
+        });
+        req.flash('error', messages);
+        return res.redirect('/admin/user-accounts/delete/temp?');
+    }
     const email = req.body.userEmail;
     User.update({'email': email}, { $set: {
         is_deleted: true
@@ -199,6 +209,18 @@ adminController.getUserAccountsDeletePermPage = (req, res) => {
 }
 
 adminController.deleteUserAccountPerm = (req, res) => {
+    req.checkBody('userEmail', 'Invalid user recovery email.').notEmpty().isEmail();
+    req.checkBody('userEmailConfirmation', 'User emails do not match.')
+        .custom((value) => value === req.body.userEmail);
+    const errors = req.validationErrors();
+    if (errors) {
+        let messages = [];
+        errors.forEach(function(error) {
+            messages.push(error.msg);
+        });
+        req.flash('error', messages);
+        return res.redirect('/admin/user-accounts/delete/perm/user?');
+    }
     const email = req.body.userEmail;
     Profile.remove({'email': email},  (err, profileRemovedData) => {
         if (err) {

@@ -25,6 +25,12 @@ menuController.getHomePage = (req, res) => {
     });
 }
 
+menuController.getDealsPage = (req, res) => {
+    res.render('shop/deals', {
+       title: 'deals' 
+    });
+}
+
 menuController.getPizzaPage = (req, res) => {
     res.render('shop/pizza', {
         title: 'Pizza'
