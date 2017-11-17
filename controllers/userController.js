@@ -4,7 +4,7 @@ const bcrypt                = require('bcrypt-nodejs');
 const Order                 = require('../models/Order');
 const Cart                  = require('../models/Cart');
 const Profile               = require('../models/Profile');
-const User                  = require('../models/user');
+const User                  = require('../models/User');
 
 const userController = {};
 

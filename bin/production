@@ -1,0 +1,15 @@
+var app = require('../app');
+var server = require('http').Server(app);
+const io = require('socket.io')(server);
+var notification = io
+  .of('/admin')
+  .on('connection', (socket) => {
+      socket.on('order notify', (data) => {
+          notification.emit('notify show', "New Order.  Please refresh page now!");
+      });
+  });
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log('Application running on ${PORT}');
+});
