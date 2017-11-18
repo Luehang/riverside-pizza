@@ -11,7 +11,6 @@ const passport              = require('passport');
 const flash                 = require('connect-flash');
 const validator             = require('express-validator');
 const MongoStore            = require('connect-mongo')(session);
-const helmet                = require('helmet');
 const methodOverride        = require('method-override');
 
 const routes                = require('./routes/index');
@@ -37,19 +36,6 @@ require('./config/passport');
 // view engine setup
 app.engine('.hbs', expressHbs({defaultLayout: 'layout', extname: '.hbs'}));
 app.set('view engine', '.hbs');
-
-app.use(helmet({
-    frameguard: {
-        action: 'deny'
-    },
-    hidePoweredBy: {
-        setTo: 'PHP 7.0.21'
-    },
-    xssFilter: {
-        setOnOldIE: true
-    },
-    ieNoOpen: true
-}));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
