@@ -11,5 +11,5 @@ var notification = io
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log('Application running on ${PORT}');
+    console.log(`Application running on ${PORT}`);
 });
