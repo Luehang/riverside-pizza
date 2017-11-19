@@ -1,11 +1,10 @@
 {
-  "name": "shopping-cart",
+  "name": "riverside-pizza-shopping",
   "version": "0.0.0",
   "author": "lue_hang@hotmail.com",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "production": "node ./bin/production"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
