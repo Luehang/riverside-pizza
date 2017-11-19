@@ -182,7 +182,7 @@ shoppingController.postCheckOut = (req, res) => {
     } = req.body;
     const cart = new Cart(req.session.cart);
     const stripe = require("stripe")(
-        process.env.SECRET_KEY
+        process.env.STRIPE_SECRET_KEY
     );
     
     let totalNum = Number.parseFloat(cart.totalAfterTax) * 100;

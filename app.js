@@ -21,6 +21,8 @@ require('dotenv').config();
 
 const app                   = express();
 
+app.disable('x-powered-by');
+
 mongoose.connect(process.env.DATABASE || 'mongodb://localhost/riverside-pizza', 
 { useMongoClient: true });
 const db = mongoose.connection;

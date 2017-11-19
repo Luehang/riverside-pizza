@@ -43,10 +43,11 @@ router.use('/', notLoggedIn, function(req, res, next) {
 
 router.get('/signup', userController.getSignUpPage);
 
-router.post('/signup', passport.authenticate('local.signup', {
-    successRedirect: '/user/orderhistory',
-    failureRedirect: '/user/signup',
-    failureFlash: true
+router.post('/signup', userController.postMiddlewareSignUpRecaptchaValidation, 
+    passport.authenticate('local.signup', {
+        successRedirect: '/user/orderhistory',
+        failureRedirect: '/user/signup',
+        failureFlash: true
 }), userController.getSignUpRedirect);
 
 router.get('/signin', userController.getSignInPage);

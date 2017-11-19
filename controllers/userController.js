@@ -1,5 +1,6 @@
 const passport              = require('passport');
 const bcrypt                = require('bcrypt-nodejs');
+const request               = require('request');
 
 const Order                 = require('../models/Order');
 const Cart                  = require('../models/Cart');
@@ -144,6 +145,35 @@ userController.postConfirmPasswordChange = (req, res) => {
         }
         req.flash('success', 'Successfully changed password.')
         return res.redirect('/user/profile');
+    });
+}
+
+userController.postMiddlewareSignUpRecaptchaValidation = (req, res, next) => {
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+    const reCaptchaUserToken = req.body['g-recaptcha-response'];
+    const userIP = req.ip;
+    const verifyUrl = `https://www.google.com/recaptcha/api/siteverify`;
+    if (reCaptchaUserToken === "") {
+        req.flash('error', "Please check \"I'm not a robot\" and try again.");
+        return res.redirect('/user/signup');
+    }
+    const formData = {
+        secret: secretKey,
+        response: reCaptchaUserToken,
+        remoteip: userIP
+    }
+    request.post({url: verifyUrl, formData: formData}, (err, res, body) => {
+        if (err) {
+            req.flash('error', "Please check \"I'm not a robot\" and try again.");
+            return res.redirect('/user/signup');
+        }
+        body = JSON.parse(body);
+        if (body.success) {
+            return next();
+        } else {
+            req.flash('error', "Please check \"I'm not a robot\" and try again.");
+            return res.redirect('/user/signup');
+        }
     });
 }
 
