@@ -26,6 +26,9 @@
                 </div>
                 <div class="panel-footer">
                     <strong>Total: <span>${{ this.cart.totalPrice }}</span></strong><br>
+                        {{#if this.cart.isPromo}}
+                            <strong>Promo: - ${{ this.cart.promoTotal }}</strong><br>
+                        {{/if}}
                     <strong>Tax: ${{ this.cart.tax }}</strong><br>
                     <strong>Total After Tax: ${{ this.cart.totalAfterTax }}</strong>
                 </div>

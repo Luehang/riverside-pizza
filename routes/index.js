@@ -15,13 +15,17 @@ router.get('/chili', menuController.getChiliPage);
 
 router.get('/drinks', menuController.getDrinksPage);
 
+router.put('/promo-code',  shoppingController.putUpdatePromoCode);
+
 router.post('/add-to-cart/:id', shoppingController.addToCart);
 
 router.get('/reduce/:id', shoppingController.reduceItems);
 
 router.get('/remove/:id', shoppingController.removeAllItems);
 
-router.get('/shopping-cart', shoppingController.getShoppingCart);
+router.get('/shopping-cart', 
+    shoppingController.middlewareShoppingCartPromoValidation,
+    shoppingController.getShoppingCart);
 
 router.get('/checkout', isLoggedIn, shoppingController.getCheckOutPage);
 

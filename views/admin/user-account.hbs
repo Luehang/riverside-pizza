@@ -27,15 +27,23 @@
                     {{#if ordersQty}}
                         <li class="list-group-item">
                             <span class="badge">${{totalBeforeTax}}</span>
-                            Total amount before tax for {{ordersQty}} out of 30 orders showing.
+                            Total amount before tax ({{ordersQty}}/30)
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge">{{totalPromoUsed}}</span>
+                            Total promo used ({{ordersQty}}/30)
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge">${{totalPromo}}</span>
+                            Total after promo ({{ordersQty}}/30)
                         </li>
                         <li class="list-group-item">
                             <span class="badge">${{totalTax}}</span>
-                            Total tax for {{ordersQty}} out of 30 orders showing.
+                            Total tax ({{ordersQty}}/30)
                         </li>
                         <li class="list-group-item">
                             <span class="badge">${{totalAfterTax}}</span>
-                            Total amount after tax for {{ordersQty}} out of 30 orders showing.
+                            Total amount after tax ({{ordersQty}}/30)
                         </li>
                     {{else}}
                         <li class="list-group-item">
@@ -76,6 +84,9 @@
                     </div>
                     <div class="panel-footer">
                         <strong>Total: <span>${{ this.cart.totalPrice }}</span></strong><br>
+                            {{#if this.cart.isPromo}}
+                                <strong>Promo: - ${{ this.cart.promoTotal }}</strong><br>
+                            {{/if}}
                         <strong>Tax: ${{ this.cart.tax }}</strong><br>
                         <strong>Total After Tax: ${{ this.cart.totalAfterTax }}</strong>
                     </div>

@@ -4,11 +4,25 @@ const nearestHundredths     = functionController.nearestHundredths;
 module.exports = function Cart(oldCart) {
     this.items = oldCart.items || {};
     this.totalQty = oldCart.totalQty || 0;
+
     this.totalPrice = oldCart.totalPrice 
         ? Number.parseFloat(nearestHundredths(oldCart.totalPrice)) 
         : 0;
-    this.totalAfterTax = nearestHundredths(this.totalPrice * 1.05);
-    this.tax = nearestHundredths(this.totalPrice * 0.05);
+
+    this.isPromo = oldCart.isPromo || false;
+    this.promoName = oldCart.promoName || "";
+    this.promoPercent = oldCart.promoPercent || 0;
+    this.promoMin = oldCart.promoMin || 0;
+    this.promoTotal = nearestHundredths(oldCart.totalPrice * oldCart.promoPercent);
+    this.afterPromoTotalPrice =  Number.parseFloat(nearestHundredths(this.totalPrice - this.promoTotal));
+
+    if (this.isPromo) {
+        this.totalAfterTax = nearestHundredths(this.afterPromoTotalPrice * 1.05);
+        this.tax = nearestHundredths(this.afterPromoTotalPrice * 0.05);
+    } else {
+        this.totalAfterTax = nearestHundredths(this.totalPrice * 1.05);
+        this.tax = nearestHundredths(this.totalPrice * 0.05);
+    }
 
     this.add = function(item, id) {
         var storedItem = this.items[id];

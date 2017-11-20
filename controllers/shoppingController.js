@@ -4,10 +4,99 @@ const Drink                 = require('../models/Drink');
 const Cart                  = require('../models/Cart');
 const Order                 = require('../models/Order');
 const Profile               = require('../models/Profile');
+const Promo                 = require('../models/Promo');
 
 const functionController    = require('./functionController');
 const nearestHundredths     = functionController.nearestHundredths;
 const shoppingController = {};
+
+shoppingController.putUpdatePromoCode = (req, res) => {
+    const { promoCode } = req.body;
+    const lowerPromo = promoCode.toLowerCase();
+    const upperPromo = promoCode.toUpperCase();
+    const regexPromo = new RegExp(`${lowerPromo}|${upperPromo}`, "g");
+    if (promoCode === "") {
+        req.flash('error', 'Please enter a promo code.');
+        return res.redirect('/shopping-cart');
+    }
+    Promo.findOne({code: regexPromo}, (err, promo) => {
+        if (err) {
+            req.flash('error', 'Please enter promo code again.');
+            return res.redirect('/shopping-cart');
+        }
+        if (promo === null) {
+            req.flash('error', 'Invalid promo code.');
+            return res.redirect('/shopping-cart');
+        }
+        if (promo) {
+            const { min, start_date, end_date, is_deleted } = promo;
+            const totalNow = Cart.totalPrice;
+            const dateNow = new Date();
+            const cart = new Cart(req.session.cart);
+            const original_start_date = `${start_date.getMonth()}/${start_date.getDate()}/${start_date.getFullYear()}`;
+            const orginal_end_date = `${end_date.getMonth()}/${end_date.getDate()}/${end_date.getFullYear()}`;
+            
+            if (is_deleted === true) {
+                req.flash('error', 'Invalid promo code.');
+                return res.redirect('/shopping-cart');
+            }
+
+            if (dateNow.getFullYear() < start_date.getFullYear()) {
+                req.flash('error', `Sorry.  Promo code is not valid until ${original_start_date}.`);
+                return res.redirect('/shopping-cart');
+            } else if (dateNow.getMonth() < start_date.getMonth() && dateNow.getFullYear() === start_date.getFullYear()) {
+                req.flash('error', `Sorry.  Promo code is not valid until ${original_start_date}.`);
+                return res.redirect('/shopping-cart');
+            } else if (dateNow.getDate() < start_date.getDate() && dateNow.getMonth() === start_date.getMonth() && dateNow.getFullYear() === start_date.getFullYear()) {
+                req.flash('error', `Sorry.  Promo code is not valid until ${original_start_date}.`);
+                return res.redirect('/shopping-cart');
+            }
+
+            if (dateNow.getFullYear() > end_date.getFullYear()) {
+                req.flash('error', `Sorry.  Promo code has expired.`);
+                return res.redirect('/shopping-cart');
+            } else if (dateNow.getMonth() > end_date.getMonth() && dateNow.getFullYear() === end_date.getFullYear()) {
+                req.flash('error', `Sorry.  Promo code has expired.`);
+                return res.redirect('/shopping-cart');
+            } else if (dateNow.getDate() > end_date.getDate() && dateNow.getMonth() === end_date.getMonth() && dateNow.getFullYear() === end_date.getFullYear()) {
+                req.flash('error', `Sorry.  Promo code has expired.`);
+                return res.redirect('/shopping-cart');
+            } 
+            if (min > cart.totalPrice) {
+                req.flash('error', `Sorry. Total price is below valid minimum of $${min}. Add more and enter promo again.`);
+                return res.redirect('/shopping-cart');
+            }
+
+            if (promo.used >= promo.limit) {
+                req.flash('error', 'Sorry. The promo code you used have reach the limit.');
+                return res.redirect('/shopping-cart');
+            }
+
+            if (cart.isPromo && cart.promoName === promo.code) {
+                req.flash('success', 'Promo code already applied.');
+                return res.redirect('/shopping-cart');
+            }
+
+            if (cart.isPromo) {
+                cart.promoName = promo.code;
+                cart.promoPercent = promo.percent;
+                req.session.cart = cart;
+                req.flash('error', 'One promo code only. Previous promo code have been replaced.');
+                return res.redirect('/shopping-cart');
+            }
+            
+            if (cart.isPromo === false) {
+                cart.isPromo = true;
+                cart.promoName = promo.code;
+                cart.promoPercent = promo.percent;
+                cart.promoMin = promo.min;
+                req.session.cart = cart;
+                req.flash('success', `PROMO: ${promo.description}`);
+                return res.redirect('/shopping-cart');
+            }
+        }
+    });
+}
 
 shoppingController.addToCart = (req, res) => {
     const productId = req.params.id;
@@ -138,17 +227,42 @@ shoppingController.removeAllItems = (req, res) => {
     res.redirect('/shopping-cart');
 }
 
+shoppingController.middlewareShoppingCartPromoValidation = (req, res, next) => {
+    if (req.session.cart) {
+        if (req.session.cart.isPromo && req.session.cart.promoMin > req.session.cart.totalPrice) {
+            const cart = new Cart(req.session.cart);
+            cart.isPromo = false;
+            cart.promoName = "";
+            cart.promoPercent = 0;
+            cart.promoMin = 0;
+            req.flash('error', `Sorry. Total price is below valid minimum of $${req.session.cart.promoMin}. Add more and enter promo again.`);
+            req.session.cart = cart;
+            return next();
+        }
+    }
+    return next();
+}
+
 shoppingController.getShoppingCart = (req, res) => {
     if (!req.session.cart) {
         return res.render('shop/shopping-cart', {products: null});
     }
     const cart = new Cart(req.session.cart);
+    const messages = req.flash('error');
+    const successMsg = req.flash('success')[0];
     res.render('shop/shopping-cart', {
         title: 'Cart',
         products: cart.generateArray(),
+        messages: messages, 
+        hasErrors: messages.length > 0,
+        successMsg: successMsg,
+        noMessages: !successMsg,
         totalPrice: cart.totalPrice,
-        totalAfterTax: cart.totalAfterTax,
-        tax: cart.tax
+        isPromo: cart.isPromo,
+        promoTotal: cart.promoTotal,
+        afterPromoTotalPrice: cart.afterPromoTotalPrice,
+        tax: cart.tax,
+        totalAfterTax: cart.totalAfterTax
     });
 }
 
@@ -233,6 +347,13 @@ shoppingController.postCheckOut = (req, res) => {
             if (err) {
                 req.flash('error', err.message);
                 return res.redirect('/checkout');
+            }
+            if (cart.isPromo) {
+                Promo.update({code: cart.promoName}, {$inc: {
+                    used: 1
+                }}, {new: true}, (err, promo) => {
+                    return;
+                });
             }
             req.flash('success', 'Payment successful.  Please come pick up in 15-30 mins.');
             req.session.cart = null;

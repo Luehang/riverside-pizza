@@ -55,6 +55,8 @@ adminController.getUserProfileAndOrdersPage = (req, res) => {
                     orders = orders.reverse();
                     let cart;
                     let totalBeforeTax = 0;
+                    let totalPromo = 0;
+                    let totalPromoUsed = 0;
                     let totalTax = 0;
                     let totalAfterTax = 0;
                     const qty = orders.length;
@@ -62,10 +64,15 @@ adminController.getUserProfileAndOrdersPage = (req, res) => {
                         cart = new Cart(order.cart);
                         order.items = cart.generateArray();
                         totalBeforeTax += Number.parseFloat(order.cart.totalPrice);
+                        if (order.cart.isPromo) { 
+                            totalPromo += Number.parseFloat(order.cart.promoTotal);
+                            totalPromoUsed++;
+                        }
                         totalTax += Number.parseFloat(order.cart.tax);
                         totalAfterTax += Number.parseFloat(order.cart.totalAfterTax);
                     });
                     totalBeforeTax = nearestHundredths(totalBeforeTax);
+                    totalPromo = nearestHundredths(totalPromo);
                     totalTax = nearestHundredths(totalTax);
                     totalAfterTax = nearestHundredths(totalAfterTax);
                     res.render('admin/user-account', {
@@ -75,6 +82,8 @@ adminController.getUserProfileAndOrdersPage = (req, res) => {
                         orders: orders,
                         ordersQty: qty,
                         totalBeforeTax: totalBeforeTax,
+                        totalPromo: totalPromo,
+                        totalPromoUsed: totalPromoUsed,
                         totalTax: totalTax,
                         totalAfterTax: totalAfterTax
                     });
