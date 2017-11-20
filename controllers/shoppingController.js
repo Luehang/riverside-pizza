@@ -42,33 +42,33 @@ shoppingController.putUpdatePromoCode = (req, res) => {
             }
 
             if (dateNow.getFullYear() < start_date.getFullYear()) {
-                req.flash('error', `Sorry.  Promo code is not valid until ${original_start_date}.`);
+                req.flash('error', `The promo code is not valid until ${original_start_date}.`);
                 return res.redirect('/shopping-cart');
             } else if (dateNow.getMonth() < start_date.getMonth() && dateNow.getFullYear() === start_date.getFullYear()) {
-                req.flash('error', `Sorry.  Promo code is not valid until ${original_start_date}.`);
+                req.flash('error', `The promo code is not valid until ${original_start_date}.`);
                 return res.redirect('/shopping-cart');
             } else if (dateNow.getDate() < start_date.getDate() && dateNow.getMonth() === start_date.getMonth() && dateNow.getFullYear() === start_date.getFullYear()) {
-                req.flash('error', `Sorry.  Promo code is not valid until ${original_start_date}.`);
+                req.flash('error', `The promo code is not valid until ${original_start_date}.`);
                 return res.redirect('/shopping-cart');
             }
 
             if (dateNow.getFullYear() > end_date.getFullYear()) {
-                req.flash('error', `Sorry.  Promo code has expired.`);
+                req.flash('error', `The promo code has expired.`);
                 return res.redirect('/shopping-cart');
             } else if (dateNow.getMonth() > end_date.getMonth() && dateNow.getFullYear() === end_date.getFullYear()) {
-                req.flash('error', `Sorry.  Promo code has expired.`);
+                req.flash('error', `The promo code has expired.`);
                 return res.redirect('/shopping-cart');
             } else if (dateNow.getDate() > end_date.getDate() && dateNow.getMonth() === end_date.getMonth() && dateNow.getFullYear() === end_date.getFullYear()) {
-                req.flash('error', `Sorry.  Promo code has expired.`);
+                req.flash('error', `The promo code has expired.`);
                 return res.redirect('/shopping-cart');
             } 
             if (min > cart.totalPrice) {
-                req.flash('error', `Sorry. Total price is below valid minimum of $${min}. Add more and enter promo again.`);
+                req.flash('error', `Total price is below valid minimum of $${min}. Add more and enter promo again.`);
                 return res.redirect('/shopping-cart');
             }
 
             if (promo.used >= promo.limit) {
-                req.flash('error', 'Sorry. The promo code you used have reach the limit.');
+                req.flash('error', 'The promo code you used have reach the limit.');
                 return res.redirect('/shopping-cart');
             }
 
@@ -235,7 +235,7 @@ shoppingController.middlewareShoppingCartPromoValidation = (req, res, next) => {
             cart.promoName = "";
             cart.promoPercent = 0;
             cart.promoMin = 0;
-            req.flash('error', `Sorry. Total price is below valid minimum of $${req.session.cart.promoMin}. Add more and enter promo again.`);
+            req.flash('error', `Promo no longer valid. Total price is below valid minimum of $${req.session.cart.promoMin}. Add more and enter promo again.`);
             req.session.cart = cart;
             return next();
         }
