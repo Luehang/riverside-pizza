@@ -7,6 +7,13 @@
         display: none;
         min-height: 22px;
         background-color: rgb(84, 187, 84);
+        position: absolute;
+        width: 100%;
+        top: 0;
+    }
+    .initial-line {
+        min-height: 22px;
+        background-color: rgb(84, 187, 84);
     }
     .line-fade {
         -webkit-animation-name: fade;
@@ -26,6 +33,7 @@
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="advertise-line">
+        <div class="initial-line line-fade col-sm-12 col-md-12"></div>
         <div class="lines line-fade col-sm-12 col-md-12">
             <div class="line-text">Look for flyer for 50% off in-store.</div>
         </div>

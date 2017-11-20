@@ -28,7 +28,7 @@ h1 {
 
 .text-deals {
     font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
-    color: rgb(133, 122, 122);
+    color: rgb(112, 105, 105);
     text-shadow: 0 0 5px rgb(185, 185, 185);
     position: absolute;
     width: 200px;
@@ -63,7 +63,7 @@ h1 {
 
 .text-menu {
     font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
-    color: rgb(133, 122, 122);
+    color: rgb(112, 105, 105);
     text-shadow: 0 0 5px rgb(185, 185, 185);
     position: absolute;
     top: 15px;
