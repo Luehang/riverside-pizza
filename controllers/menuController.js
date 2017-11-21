@@ -44,7 +44,7 @@ menuController.getChiliPage = (req, res) => {
     Chili.find(function(err, docs) {
         let productChunks = [];
         let chunkSize = 2;
-        for (var n = 1; n < docs.length; n++) {
+        for (var n = 0; n < docs.length; n++) {
             if (docs[n].select.length === 1) {
                 docs[n].select[0].price = priceToCompleteString(docs[n].select[0].price);
             } else if (docs[n].select.length === 2) {
