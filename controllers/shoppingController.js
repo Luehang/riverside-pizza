@@ -8,6 +8,8 @@ const Promo                 = require('../models/Promo');
 
 const functionController    = require('./functionController');
 const nearestHundredths     = functionController.nearestHundredths;
+const priceToCompleteString = functionController.priceToCompleteString;
+
 const shoppingController = {};
 
 shoppingController.putUpdatePromoCode = (req, res) => {
@@ -109,9 +111,9 @@ shoppingController.addToCart = (req, res) => {
                 return res.redirect('/chili');
             }
             let title = "";
-            if (req.body.price === "1.67") {
+            if (req.body.price === "3.20") {
                 title = chili.title + " 16 oz.";
-            } else if (req.body.price === "2.67") {
+            } else if (req.body.price === "5.29") {
                 title = chili.title + " 32 oz.";
             }
             Product.find({title: title}, (err, product) => {
@@ -257,12 +259,12 @@ shoppingController.getShoppingCart = (req, res) => {
         hasErrors: messages.length > 0,
         successMsg: successMsg,
         noMessages: !successMsg,
-        totalPrice: cart.totalPrice,
+        totalPrice: priceToCompleteString(cart.totalPrice),
         isPromo: cart.isPromo,
-        promoTotal: cart.promoTotal,
-        afterPromoTotalPrice: cart.afterPromoTotalPrice,
-        tax: cart.tax,
-        totalAfterTax: cart.totalAfterTax
+        promoTotal: priceToCompleteString(cart.promoTotal),
+        afterPromoTotalPrice: priceToCompleteString(cart.afterPromoTotalPrice),
+        tax: priceToCompleteString(cart.tax),
+        totalAfterTax: priceToCompleteString(cart.totalAfterTax)
     });
 }
 

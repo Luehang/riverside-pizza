@@ -39,4 +39,18 @@ functionController.nearestHundredths = (number) => {
     return number;
 }
 
+functionController.priceToCompleteString = (number) => {
+    newString = number.toString();
+    if ((/\./).test(newString) !== true) {
+        return newString + ".00";
+    }
+    const startIndex = newString.match(/\./).index + 1;
+    const decimalPlace = newString.substring(startIndex, newString.length);
+    if (decimalPlace.length === 1) {
+        return newString + "0";
+    } else {
+        return newString;
+    }
+}
+
 module.exports = functionController;

@@ -3,6 +3,9 @@ const Chili                 = require('../models/Chili');
 const Drink                 = require('../models/Drink');
 const Profile               = require('../models/Profile');
 
+const functionController    = require('./functionController');
+const priceToCompleteString = functionController.priceToCompleteString;
+
 const menuController = {};
 
 menuController.getHomePage = (req, res) => {
@@ -41,6 +44,14 @@ menuController.getChiliPage = (req, res) => {
     Chili.find(function(err, docs) {
         let productChunks = [];
         let chunkSize = 2;
+        for (var n = 1; n < docs.length; n++) {
+            if (docs[n].select.length === 1) {
+                docs[n].select[0].price = priceToCompleteString(docs[n].select[0].price);
+            } else if (docs[n].select.length === 2) {
+                docs[n].select[0].price = priceToCompleteString(docs[n].select[0].price);
+                docs[n].select[1].price = priceToCompleteString(docs[n].select[1].price);
+            }
+        }
         for (var i = 0; i < docs.length; i += chunkSize) {
             productChunks.push(docs.slice(i, i + chunkSize));
         }
@@ -65,6 +76,5 @@ menuController.getDrinksPage = (req, res) => {
     });
 }
 
-
-
 module.exports = menuController;
+

@@ -11,7 +11,7 @@ const chilis = [
         select: [
             {
                 size: 32,
-                price: 2.67
+                price: 5.29
             }
         ]
     }),
@@ -22,11 +22,11 @@ const chilis = [
         select: [
             {
                 size: 16,
-                price: 1.67
+                price: 3.20
             },
             {
                 size: 32,
-                price: 2.67
+                price: 5.29
             }
         ]
     }),
@@ -36,11 +36,11 @@ const chilis = [
         select: [
             {
                 size: 16,
-                price: 1.67
+                price: 3.20
             },
             {
                 size: 32,
-                price: 2.67
+                price: 5.29
             }
         ]
     }),
@@ -51,11 +51,11 @@ const chilis = [
         select: [
             {
                 size: 16,
-                price: 1.67
+                price: 3.20
             },
             {
                 size: 32,
-                price: 2.67
+                price: 5.29
             }
         ]
     }),
@@ -65,11 +65,11 @@ const chilis = [
         select: [
             {
                 size: 16,
-                price: 1.67
+                price: 3.20
             },
             {
                 size: 32,
-                price: 2.67
+                price: 5.29
             }
         ]
     }),
@@ -79,11 +79,11 @@ const chilis = [
         select: [
             {
                 size: 16,
-                price: 1.67
+                price: 3.20
             },
             {
                 size: 32,
-                price: 2.67
+                price: 5.29
             }
         ]
     })

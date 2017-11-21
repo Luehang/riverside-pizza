@@ -1,5 +1,6 @@
 const functionController    = require('../controllers/functionController');
 const nearestHundredths     = functionController.nearestHundredths;
+const priceToCompleteString = functionController.priceToCompleteString;
 
 module.exports = function Cart(oldCart) {
     this.items = oldCart.items || {};
@@ -56,6 +57,8 @@ module.exports = function Cart(oldCart) {
     this.generateArray = function() {
         var arr = [];
         for (var id in this.items) {
+            const changeItem = this.items[id];
+            changeItem.price = priceToCompleteString(changeItem.price);
             arr.push(this.items[id]);
         }
         return arr;

@@ -7,57 +7,57 @@ const products = [
     new Product({
         title: 'Manitowoc Hometown Chili 32 oz.',
         description: '32 oz.',
-        price: 2.67,
+        price: 5.29,
     }),
     new Product({
         title: 'Regular Chili 16 oz.',
         description: '16 oz.',
-        price: 1.67,
+        price: 3.20,
     }),
     new Product({
         title: 'Regular Chili 32 oz.',
         description: '32 oz.',
-        price: 2.67,
+        price: 5.29,
     }),
     new Product({
         title: 'Potato Chili 16 oz.',
         description: '16 oz.',
-        price: 1.67,
+        price: 3.20,
     }),
     new Product({
         title: 'Potato Chili 32 oz.',
         description: '32 oz.',
-        price: 2.67,
+        price: 5.29,
     }),
     new Product({
         title: 'Hot Dog Chili 16 oz.',
         description: '16 oz.',
-        price: 1.67,
+        price: 3.20,
     }),
     new Product({
         title: 'Hot Dog Chili 32 oz.',
         description: '32 oz.',
-        price: 2.67,
+        price: 5.29,
     }),
     new Product({
         title: 'Vegetable Chili 16 oz.',
         description: '16 oz.',
-        price: 1.67,
+        price: 3.20,
     }),
     new Product({
         title: 'Vegetable Chili 32 oz.',
         description: '32 oz.',
-        price: 2.67,
+        price: 5.29,
     }),
     new Product({
         title: 'Extra Hot Chili 16 oz.',
         description: '16 oz.',
-        price: 1.67,
+        price: 3.20,
     }),
     new Product({
         title: 'Extra Hot Chili 32 oz.',
         description: '32 oz.',
-        price: 2.67,
+        price: 5.29,
     }),
     new Product({
         title: 'Coca Cola 16 oz.',
