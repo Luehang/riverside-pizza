@@ -1,4 +1,4 @@
-Stripe.setPublishableKey('pk_test_AhDwyxYOzXzwi6Nbo7fQrZXY');
+Stripe.setPublishableKey('pk_live_LPJdPgXmwA5EpBpSVRpvxQat');
 
 const admin = io('/admin');   
 const $number = $('#card-number');
