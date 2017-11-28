@@ -130,14 +130,6 @@
 
 <script>
     let lineIndex = 0;
-    setTimeout(function() {
-        manualSlides(lineIndex);
-    }, 10);
-
-    const autoLines = setInterval(function() {
-        lineIndex++;
-        manualLines(lineIndex);
-    }, 3000);
 
     function manualLines(n) {
         var i;
@@ -149,4 +141,13 @@
         }
         slides[lineIndex].style.display = "block"; 
     }
+
+    setTimeout(function() {
+        manualLines(lineIndex);
+    }, 10);
+
+    const autoLines = setInterval(function() {
+        lineIndex++;
+        manualLines(lineIndex);
+    }, 3000);
 </script>

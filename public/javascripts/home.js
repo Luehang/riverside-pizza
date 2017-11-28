@@ -1,13 +1,5 @@
 let slideIndex = 0;
 let autoSlides;
-setTimeout(function() {
-    manualSlides(slideIndex);
-}, 10);
-
-autoSlides = setInterval(function() {
-    slideIndex++;
-    manualSlides(slideIndex);
-}, 3000);
 
 function manualSlides(n) {
     var i;
@@ -24,6 +16,15 @@ function manualSlides(n) {
     slides[slideIndex].style.display = "block"; 
     dots[slideIndex].className += " active";
 }
+
+setTimeout(function() {
+    manualSlides(slideIndex);
+}, 10);
+
+autoSlides = setInterval(function() {
+    slideIndex++;
+    manualSlides(slideIndex);
+}, 3000);
 
 function plusSlides(n) {
     clearInterval(autoSlides);
