@@ -11,11 +11,11 @@ header {
 .brand-title {
     font-family: 'Pacifico', 'cursive', 'Brush Script MT';
     font-size: 2.5em;
-    transition: transform 2s;
+    transition: transform 100ms cubic-bezier(0.07, 1.09, 0.7, 1.51);;
 }
 
 .brand-title:hover {
-    font-size: 2.7em;
+    transform: scale(1.05);
 }
 
 a .navbar-brand {

@@ -54,4 +54,9 @@ select {
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
+    transition: transform 100ms ease-in-out;
+}
+
+.thumbnail button:hover {
+    transform: scale(1.03);
 }
