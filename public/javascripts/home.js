@@ -24,7 +24,7 @@ setTimeout(function() {
 autoSlides = setInterval(function() {
     slideIndex++;
     manualSlides(slideIndex);
-}, 3000);
+}, 4000);
 
 function plusSlides(n) {
     clearInterval(autoSlides);
@@ -32,7 +32,7 @@ function plusSlides(n) {
     autoSlides = setInterval(function() {
         slideIndex++;
         manualSlides(slideIndex);
-    }, 3000);
+    }, 4000);
 }
 
 function currentSlide(n) {
@@ -41,5 +41,5 @@ function currentSlide(n) {
     autoSlides = setInterval(function() {
         slideIndex++;
         manualSlides(slideIndex);
-    }, 3000);
+    }, 4000);
 }
