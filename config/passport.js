@@ -22,8 +22,8 @@ passport.use('local.signup', new LocalStrategy({
     req.checkBody('email', 'Invalid email.').notEmpty().isEmail();
     req.checkBody('password', 'Invalid password.').notEmpty();
     req.checkBody('password', 'Password needs to be greater than 5 letters.').isLength({min: 5});
-    req.checkBody('password', 'Password must contain a number.').matches(/\d/);
-    req.checkBody('password', 'Password must contain a capitalized letter.').matches(/[A-Z]/);
+    //req.checkBody('password', 'Password must contain a number.').matches(/\d/);
+    //req.checkBody('password', 'Password must contain a capitalized letter.').matches(/[A-Z]/);
     req.checkBody('passwordConfirmation', 'Passwords do not match.')
         .custom((value) => value === req.body.password);
     const errors = req.validationErrors();
