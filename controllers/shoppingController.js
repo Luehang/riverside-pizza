@@ -308,7 +308,7 @@ shoppingController.postCheckOut = (req, res) => {
         amount: totalNum, // cents
         currency: "usd",
         source: req.body.stripeToken, // obtained with Stripe.js
-        description: "Test charge."
+        description: `Charge for ${req.user.email}`
     }, function(err, charge) {
         if (err) {
             req.flash('error', err.message);
