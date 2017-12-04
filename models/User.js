@@ -7,7 +7,8 @@ const userSchema = new Schema({
     email: {type: String, required: true},
     password: {type: String, required: true},
     created_at: {type: Date, default: Date.now},
-    is_deleted: {type: Boolean, default: false}
+    is_deleted: {type: Boolean, default: false},
+    role: {type: String, default: 'user'}
 });
 
 userSchema.methods.encryptPassword = function(password) {

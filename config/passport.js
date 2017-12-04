@@ -43,6 +43,9 @@ passport.use('local.signup', new LocalStrategy({
         }
         const newUser = new User();
         newUser.email = email.toLowerCase();
+        if (newUser.email == process.env.EMAIL_ADMIN) {
+            newUser.role = 'admin'
+        }
         newUser.password = newUser.encryptPassword(password);
         newUser.save(function(err, result) {
             if (err) {

@@ -113,7 +113,7 @@ adminController.getUserAccountRecoverPage = (req, res) => {
 }
 
 adminController.middlewareValidateAdmin = (req, res, next) => {
-    if (req.user._id.toString() === process.env.ADMIN) {
+    if (req.user.role === 'admin') {
         return next();
     }
     req.logout();
@@ -259,4 +259,24 @@ adminController.deleteUserAccountPerm = (req, res) => {
     });
 }
 
+adminController.getShareAdmin = (req, res) => {
+    const userEmail = req.query.user
+    console.log(userEmail)
+    User.findOne({email: userEmail}, function (err, user) {
+        if (err) throw err;
+        if (!user) {
+            req.flash('error', 'User not found');
+            return res.redirect('/admin/user-accounts')
+        }
+        user.role = 'admin'
+        user.save(function (err) {
+            if (err) {
+                req.flash('error', 'Have an error trying save user');
+                return res.redirect('/admin/user-accounts')
+            }
+            req.flash('success', 'Successfully changed user to a admin')
+            return res.redirect('/admin/user-accounts');
+        })
+    })
+}
 module.exports = adminController;

@@ -14,7 +14,11 @@ router.get('/user-accounts', isLoggedIn, isAdmin, adminController.getUserAccount
 
 router.get('/user-accounts/recover', isLoggedIn, isAdmin, adminController.getUserAccountRecoverPage);
 
+router.get('/user-accounts/share-admin', isLoggedIn, isAdmin, adminController.getShareAdmin);
+
 router.get('/user-accounts/:id', isLoggedIn, isAdmin, adminController.getUserProfileAndOrdersPage);
+
+
 
 router.post('/user-accounts/confirm-recover', isLoggedIn,
     passport.authenticate('local.signin', {
@@ -55,7 +59,7 @@ function notLoggedIn(req, res, next) {
 }
 
 function isAdmin(req, res, next) {
-    if (req.user._id.toString() === process.env.ADMIN) {
+    if (req.user.role === 'admin') {
         return next();
     }
     res.redirect('/');
