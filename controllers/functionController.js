@@ -1,5 +1,6 @@
 const functionController = {};
 
+// function to round number to nearest hundredths
 functionController.nearestHundredths = (number) => {
     if ((/\./).test(number)) {
       number = number.toString();
@@ -39,6 +40,7 @@ functionController.nearestHundredths = (number) => {
     return number;
 }
 
+// function to change price to string ex. "2.00"
 functionController.priceToCompleteString = (number) => {
     newString = number.toString();
     if ((/\./).test(newString) !== true) {

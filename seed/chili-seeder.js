@@ -1,8 +1,10 @@
 const Chili = require('../models/Chili');
 
+// connect to mongo db
 const mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/riverside-pizza", { useMongoClient: true });
 
+// data to add to mongo db
 const chilis = [
     new Chili({
         imagePath: "img/no-image.png",
@@ -89,20 +91,21 @@ const chilis = [
     })
 ];
 
+// clear data collection
 mongoose.connection.dropCollection('chilis', (err, result) => {
-    return;
+    // iterate over data and add to db
+    var done = 0;
+    for (var i = 0; i < chilis.length; i++) {
+        chilis[i].save(function(err, result) {
+            done++;
+            if (done === chilis.length) {
+                exit();
+            }
+        });
+    }
 });
 
-var done = 0;
-for (var i = 0; i < chilis.length; i++) {
-    chilis[i].save(function(err, result) {
-        done++;
-        if (done === chilis.length) {
-            exit();
-        }
-    });
-}
-
+// db disconnection function
 function exit() {
     mongoose.disconnect();
 }
