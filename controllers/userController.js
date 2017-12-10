@@ -331,7 +331,7 @@ userController.getSignInRedirect = (req, res) => {
         const oldUrl = req.session.oldUrl;
         req.session.oldUrl = null;
         res.redirect(oldUrl);
-    } else if (req.user.role === 'admin') {
+    } else if (req.user._id.toString() === process.env.ADMIN) {
         res.redirect('/admin/customerhistory');
     } else {
         res.redirect('/user/orderhistory');

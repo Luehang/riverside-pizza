@@ -52,6 +52,9 @@ router.route('/user-accounts/delete/perm/user?')
             failureFlash: true
     }), adminController.middlewareValidateAdmin, adminController.deleteUserAccountPerm)
 
+router.route('/drinks')
+      .get(isLoggedIn, isAdmin, adminController.getDrinksPage)
+
 module.exports = router;
 
 // user login authentication function
@@ -72,7 +75,7 @@ function notLoggedIn(req, res, next) {
 
 // admin authentication function
 function isAdmin(req, res, next) {
-    if (req.user.role === 'admin') {
+     if (req.user._id.toString() === process.env.ADMIN) {
         return next();
     }
     res.redirect('/');

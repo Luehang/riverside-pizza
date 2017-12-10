@@ -7,6 +7,7 @@ const Order                 = require('../models/Order');
 const Cart                  = require('../models/Cart');
 const User                  = require('../models/User');
 const Profile               = require('../models/Profile');
+const Drink                 = require('../models/Drink');
 
 // controllers
 const functionController    = require('../controllers/functionController');
@@ -371,24 +372,13 @@ adminController.deleteUserAccountPerm = (req, res) => {
     });
 }
 
-adminController.getShareAdmin = (req, res) => {
-    const userEmail = req.query.user
-    console.log(userEmail)
-    User.findOne({email: userEmail}, function (err, user) {
+adminController.getDrinksPage =  (req,res) => {
+    Drink.find({}, function (err, drinks) {
         if (err) throw err;
-        if (!user) {
-            req.flash('error', 'User not found');
-            return res.redirect('/admin/user-accounts')
-        }
-        user.role = 'admin'
-        user.save(function (err) {
-            if (err) {
-                req.flash('error', 'Have an error trying save user');
-                return res.redirect('/admin/user-accounts')
-            }
-            req.flash('success', 'Successfully changed user to a admin')
-            return res.redirect('/admin/user-accounts');
+        res.render('admin/drinks-table', {
+            drinks: drinks
         })
     })
 }
+
 module.exports = adminController;

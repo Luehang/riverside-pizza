@@ -1,0 +1,26 @@
+<div class="container">
+  <h2>Drinks:</h2>
+  <p>Show drinks have in database:</p>
+  <a href="/admin/drinks/add"><button class="btn btn-success">Add new drink</button></a>
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Image Path</th>
+        <th>Select</th>
+      </tr>
+    </thead>
+    <tbody>
+        {{#each drinks}}
+      <tr>
+        <td><a href="/admin/drinks/{{_id}}">{{title}}</a></td>
+        <td>{{description}}</td>
+        <td>{{imagePath}}</td>
+        <td>{{#each select}}size: {{size}}, price: {{price}}<br/>{{/ each}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
