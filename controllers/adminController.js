@@ -164,7 +164,7 @@ adminController.getUserAccountRecoverPage = (req, res) => {
 
 // middleware validate admin
 adminController.middlewareValidateAdmin = (req, res, next) => {
-    if (req.user.role === 'admin') {
+    if (req.user._id.toString() === process.env.ADMIN) {
         return next();
     }
     req.logout();

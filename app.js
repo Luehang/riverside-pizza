@@ -47,7 +47,7 @@ app.set('view engine', '.hbs');
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
+// uncomment if in development mode
 // app.use(logger('dev'));
 
 // use body parser
