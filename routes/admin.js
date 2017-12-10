@@ -19,10 +19,13 @@ router.get('/user-accounts', isLoggedIn, isAdmin, adminController.getUserAccount
 // GET user individual account recover page
 router.get('/user-accounts/recover', isLoggedIn, isAdmin, adminController.getUserAccountRecoverPage);
 
+
+
 // GET user individual account profile and history page
 router.get('/user-accounts/:id', isLoggedIn, isAdmin, adminController.getUserProfileAndOrdersPage);
 
 // POST user individual account recover page
+
 router.post('/user-accounts/confirm-recover', isLoggedIn,
     passport.authenticate('local.signin', {
         failureRedirect: '/admin/user-accounts/recover',
@@ -49,6 +52,9 @@ router.route('/user-accounts/delete/perm/user?')
             failureFlash: true
     }), adminController.middlewareValidateAdmin, adminController.deleteUserAccountPerm)
 
+router.route('/drinks')
+      .get(isLoggedIn, isAdmin, adminController.getDrinksPage)
+
 module.exports = router;
 
 // user login authentication function
@@ -69,7 +75,7 @@ function notLoggedIn(req, res, next) {
 
 // admin authentication function
 function isAdmin(req, res, next) {
-    if (req.user._id.toString() === process.env.ADMIN) {
+     if (req.user._id.toString() === process.env.ADMIN) {
         return next();
     }
     res.redirect('/');

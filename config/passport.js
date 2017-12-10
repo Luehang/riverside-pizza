@@ -57,7 +57,9 @@ passport.use('local.signup', new LocalStrategy({
         // add user email
         newUser.email = email.toLowerCase();
 
+
         // encrypt and add password
+
         newUser.password = newUser.encryptPassword(password);
 
         // save user in db

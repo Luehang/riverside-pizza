@@ -27,7 +27,7 @@ const app                   = express();
 app.disable('x-powered-by');
 
 // connect to database
-mongoose.connect(process.env.DATABASE || 'mongodb://localhost/riverside-pizza', 
+mongoose.connect(process.env.DATABASE || 'mongodb://localhost/riverside-pizza',
 { useMongoClient: true });
 const db = mongoose.connection;
 db.on("open", function(ref) {
@@ -48,7 +48,6 @@ app.set('view engine', '.hbs');
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-// uncomment if in development mode
 // app.use(logger('dev'));
 
 // use body parser
@@ -63,8 +62,8 @@ app.use(cookieParser());
 
 // settings for session
 app.use(session({
-  secret: process.env.SESSION_SECRET, 
-  resave: false, 
+  secret: process.env.SESSION_SECRET,
+  resave: false,
   saveUninitialized: false,
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   cookie: { maxAge: 180 * 60 * 1000 } // 3 hours
