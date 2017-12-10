@@ -7,6 +7,7 @@ const Order                 = require('../models/Order');
 const Cart                  = require('../models/Cart');
 const User                  = require('../models/User');
 const Profile               = require('../models/Profile');
+const Drink                 = require('../models/Drink');
 
 // controllers
 const functionController    = require('../controllers/functionController');
@@ -163,7 +164,7 @@ adminController.getUserAccountRecoverPage = (req, res) => {
 
 // middleware validate admin
 adminController.middlewareValidateAdmin = (req, res, next) => {
-    if (req.user._id.toString() === process.env.ADMIN) {
+    if (req.user.role === 'admin') {
         return next();
     }
     req.logout();
@@ -369,6 +370,15 @@ adminController.deleteUserAccountPerm = (req, res) => {
             });
         });
     });
+}
+
+adminController.getDrinksPage =  (req,res) => {
+    Drink.find({}, function (err, drinks) {
+        if (err) throw err;
+        res.render('admin/drinks-table', {
+            drinks: drinks
+        })
+    })
 }
 
 module.exports = adminController;
