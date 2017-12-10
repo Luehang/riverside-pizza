@@ -1,8 +1,10 @@
 const Promo = require('../models/Promo');
 
+// connect to mongo db
 const mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/riverside-pizza", { useMongoClient: true });
 
+// data to add to mongo db
 const promos = [
     new Promo({
         code: '15OFF',
@@ -15,20 +17,21 @@ const promos = [
     })
 ];
 
+// clear data collection
 mongoose.connection.dropCollection('promos', (err, result) => {
-    return;
+    // iterate over data and add to db
+    var done = 0;
+    for (var i = 0; i < promos.length; i++) {
+        promos[i].save(function(err, result) {
+            done++;
+            if (done === promos.length) {
+                exit();
+            }
+        });
+    }
 });
 
-var done = 0;
-for (var i = 0; i < promos.length; i++) {
-    promos[i].save(function(err, result) {
-        done++;
-        if (done === promos.length) {
-            exit();
-        }
-    });
-}
-
+// db disconnection function
 function exit() {
     mongoose.disconnect();
 }

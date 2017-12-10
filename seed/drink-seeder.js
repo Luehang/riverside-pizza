@@ -3,6 +3,7 @@ const Drink = require('../models/Drink');
 const mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/riverside-pizza", { useMongoClient: true });
 
+// data to add to mongo db
 const drinks = [
     new Drink({
         imagePath: "img/coke.jpg",
@@ -47,20 +48,21 @@ const drinks = [
     })
 ];
 
+// clear data collection
 mongoose.connection.dropCollection('drinks', (err, result) => {
-    return;
+    // iterate over data and add to db
+    var done = 0;
+    for (var i = 0; i < drinks.length; i++) {
+        drinks[i].save(function(err, result) {
+            done++;
+            if (done === drinks.length) {
+                exit();
+            }
+        });
+    }
 });
 
-var done = 0;
-for (var i = 0; i < drinks.length; i++) {
-    drinks[i].save(function(err, result) {
-        done++;
-        if (done === drinks.length) {
-            exit();
-        }
-    });
-}
-
+// db disconnection function
 function exit() {
     mongoose.disconnect();
 }

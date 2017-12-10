@@ -1,3 +1,4 @@
+// controllers
 const functionController    = require('../controllers/functionController');
 const nearestHundredths     = functionController.nearestHundredths;
 const priceToCompleteString = functionController.priceToCompleteString;
@@ -17,6 +18,7 @@ module.exports = function Cart(oldCart) {
     this.promoTotal = nearestHundredths(oldCart.totalPrice * oldCart.promoPercent);
     this.afterPromoTotalPrice =  Number.parseFloat(nearestHundredths(this.totalPrice - this.promoTotal));
 
+    // if promo code is applied
     if (this.isPromo) {
         this.totalAfterTax = nearestHundredths(this.afterPromoTotalPrice * 1.05);
         this.tax = nearestHundredths(this.afterPromoTotalPrice * 0.05);
@@ -25,6 +27,7 @@ module.exports = function Cart(oldCart) {
         this.tax = nearestHundredths(this.totalPrice * 0.05);
     }
 
+    // function to add item
     this.add = function(item, id) {
         var storedItem = this.items[id];
         if (!storedItem) {
@@ -37,6 +40,7 @@ module.exports = function Cart(oldCart) {
         this.totalPrice = nearestHundredths(this.totalPrice + storedItem.item.price);
     };
 
+    // function to reduce individual item
     this.reduceByOne = function(id) {
         this.items[id].qty--;
         this.items[id].price = nearestHundredths(this.items[id].price - this.items[id].item.price);
@@ -48,12 +52,14 @@ module.exports = function Cart(oldCart) {
         }
     };
 
+    // function to reduce individual item completely
     this.removeItem = function(id) {
         this.totalQty -= this.items[id].qty;
         this.totalPrice = nearestHundredths(this.totalPrice - this.items[id].price);
         delete this.items[id];
     };
 
+    // function to convert items to array
     this.generateArray = function() {
         var arr = [];
         for (var id in this.items) {
