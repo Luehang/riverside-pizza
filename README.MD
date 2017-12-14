@@ -53,15 +53,15 @@ $ node user-seeder.js
 
 ### 3. Edit files and create .env file
 
-Navigate to ``public/javascripts/checkout.js`` and look above the javascript file for ``checkout.js``.  You should see Stripe's "**setPublishableKey**."  Enter in your **publishable test key** here...
+Navigate into ``public/javascripts/checkout.js`` and look above the javascript file.  You should see Stripe's "**setPublishableKey**."  Enter in your **publishable test key** here...
 
 ![](doc/source/images/stripe-publishable-key-code.png)
 
-After that, locate the user's ``signup.hbs`` in ``views/user`` and change Google's reCAPTCHA **publishable key** as shown here on this image.
+After that, locate the user's ``signup.hbs`` in ``views/user/`` and change Google's reCAPTCHA **publishable key** as shown here on this image.
 
 ![](doc/source/images/recaptcha-publishable-key-code.png)
 
-Modify ``env.example``'s name to ``.env`` and populate the service
+Modify ``env.contributing``'s name to ``.env`` and populate the service
 credentials as you create the credentials:
 
 ```
@@ -88,7 +88,7 @@ SESSION_SECRET=<put session secret phrase here>
 
 ### 4. Run the web application
 
-Enter the following while in the ``/riverside-pizza`` directory to run the app locally...
+Enter the following while in the ``riverside-pizza/`` directory to run the app locally...
 
 ```
 $ npm install
