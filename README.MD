@@ -35,25 +35,25 @@ Perform steps 1-4:
 
   **Clone** `riverside-pizza` locally. In a terminal, run:
 
-    `$ git clone https://github.com/Luehang/riverside-pizza.git riverside-pizza`
+  `$ git clone https://github.com/Luehang/riverside-pizza.git riverside-pizza`
 
 ### 2. Add data to database
 
   Navigate into the ``riverside-pizza/seed`` directory and run the following to add the necessary data...
 
-    ```
-    $ cd riverside-pizza/seed
-    $ node chili-seeder.js
-    $ node drink-seeder.js
-    $ node item-seeder.js
-    $ node promo-seeder.js
-    ```
+  ```
+  $ cd riverside-pizza/seed
+  $ node chili-seeder.js
+  $ node drink-seeder.js
+  $ node item-seeder.js
+  $ node promo-seeder.js
+  ```
 
   Enter this for testing purposes...
 
-    ```
-    $ node user-seeder.js
-    ```
+  ```
+  $ node user-seeder.js
+  ```
 
 ### 3. Edit files and create .env file
 
@@ -99,10 +99,10 @@ Perform steps 1-4:
 
   Enter the following while in the ``riverside-pizza/`` directory to run the app locally...
 
-    ```
-    $ npm install
-    $ npm start
-    ```
+  ```
+  $ npm install
+  $ npm start
+  ```
 
   Application will run default at **localhost:5000**...
 
