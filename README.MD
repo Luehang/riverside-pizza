@@ -1,5 +1,5 @@
 # Riverside Pizza's Source Code
-This repository holds the source code to ``https://www.manitowocriversidepizza.com`` that is built with
+This repository holds the source code to [https://www.manitowocsriversidepizza.com](https://www.manitowocsriversidepizza.com) that is built with
 **NodeJS/Express/MongoDB**.
 
 ## Found a bug?
@@ -94,6 +94,7 @@ Enter the following while in the ``/riverside-pizza`` directory to run the app l
 $ npm install
 $ npm start
 ```
+Application will run default at **localhost:5000**...
 
 **Thank you for contributing and happy coding!**
 
