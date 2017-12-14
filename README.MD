@@ -53,15 +53,15 @@ $ node user-seeder.js
 
 ### 3. Edit files and create .env file
 
-Navigate into ``public/javascripts/checkout.js`` and look above the javascript file.  You should see Stripe's "**setPublishableKey**."  Enter in your **publishable test key** here...
+* Navigate into ``public/javascripts/checkout.js`` and look above the javascript file.  You should see Stripe's "**setPublishableKey**."  Enter in your **publishable test key** here...
 
 ![](doc/source/images/stripe-publishable-key-code.png)
 
-After that, locate the user's ``signup.hbs`` in ``views/user/`` and change Google's reCAPTCHA **publishable key** as shown here on this image.
+* After that, locate the user's ``signup.hbs`` in ``views/user/`` and change Google's reCAPTCHA **publishable key** as shown here on this image.
 
 ![](doc/source/images/recaptcha-publishable-key-code.png)
 
-Modify ``env.contributing``'s name to ``.env`` and populate the service
+* Modify ``env.contributing``'s name to ``.env`` and populate the service
 credentials as you create the credentials:
 
 ```
@@ -72,10 +72,12 @@ STRIPE_SECRET_KEY=<put Stripe's Secret Test Key here>
 RECAPTCHA_SECRET_KEY=<put Google's reCaptcha Secret Key here>
 ```
 
-Add an Admin user's ``_id`` from database.
+* Add an Admin user's ``_id`` by navigating into the the ``users`` **collection** in the ``riverside-pizza`` **database** as shown below.
+
+![](doc/source/images/admin-search.png)
 
 ```
-# Validation _id for admin account (obtain in MongoDB)
+# User's _id for admin account (obtain in MongoDB)
 ADMIN=<put User's _id here>
 ```
 
