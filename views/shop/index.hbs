@@ -1,4 +1,4 @@
-<link rel='stylesheet' href='/stylesheets/home.css'/>
+<link rel='stylesheet' href='/stylesheets/home.v2.css'/>
 {{#if name}}
     <div class="name-header row">
         <div class="col-xs-12">
@@ -33,90 +33,167 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="deals-container col-sm-12 col-md-12">
-        <a href="/deals">
-            <div class="text-deals">
-                <span>&#8661;</span>
-                <span>DEALS</span>
-                <span>&#8661;</span>
-            </div>
-            <img src="img/pizza1.jpg" alt="..." class="img-responsive" style="width: 100%">
-        </a>
+<div id="landing-container" class="row">
+    {{!-- cta stands for call to action --}}
+    <div id="landing-cta" class="">
+        <img src="../img/pizza_logo_03.png" alt="Pizza Logo">
+        <h1>Welcome to Riverside</h1>
     </div>
+    <a href="#handcrafted-section" class="btn light-green btn-large btn-floating pulse"><i class="material-icons">arrow_downward</i></a>    
 </div>
 
-<hr>
-
-<div class="row">
-    <h1>MENU</h1>
-    <div class="menu-container col-xs-12 col-sm-4">
-        <a href="/pizza">
-            <div class="text-menu">
-                <span>Pizza</span>
-                <span>&#187</span>
+<div class="container">
+    <img src="/img/vines-lg.png" alt="vines" class="vines">
+    <section id="handcrafted-section" class="row">
+        <aside id="handcrafted-call-to-action" class="col s12 m6">
+            <div class="container">
+                <h3>Experience hand crafted exellence</h3>
+                <a href="/pizza" class="btn green waves-effect waves-light">
+                    <i class="material-icons left">local_pizza</i>
+                    SHOP PIZZA
+                </a>
             </div>
-            <img src="img/pizza4.jpg" alt="..." class="img-responsive" style="width: 100%">
-        </a>
-    </div>
-    <div class="menu-container col-xs-6 col-sm-4">
-        <a href="/chili">
-            <div class="text-menu">
-                <span>Chili</span>
-                <span>&#187</span>
-            </div>
-            <img src="img/chili.jpg" alt="..." class="img-responsive" style="width: 100%">
-        </a>
-    </div>
-    <div class="menu-container col-xs-6 col-sm-4">
-        <a href="/drinks">
-            <div class="text-menu">
-                <span>Drinks</span>
-                <span>&#187</span>
-            </div>
-            <img src="img/softdrinks.jpg" alt="..." class="img-responsive" style="width: 100%">
-        </a>
-    </div>
+        </aside>
+        <aside class="col s12 m6">
+            <img src="/img/pizza_03.jpg" alt="Handcrafted Pizza" class="responsive-img">
+        </aside>
+    </section>
+    <img src="/img/vines-lg.png" alt="vines flipped" class="vines flipped">
 </div>
 
-<hr>
+<section id="deals-section">
+    <div id="deals-container">
+        <img id="deals-img" src="/img/text_area_01.jpg" alt="Text Area Image" class="responsive-img">
+        <aside id="text-on-image-right">
+            <h1>Check out our <span class="materialize-red-text">spicy</span> deals</h1>
+            <a id="deals-cta-btn" href="/deals" class="btn materialize-red waves-effect waves-light">
+                <i class="material-icons left">
+                    whatshot
+                </i>
+                DEALS
+            </a>
+        </aside>
+    </div>
+</section>
 
-<div class="info-container row">
-    <div class="col-xs-12">
-        <h4>Location:</h2>
-        <p>114 North 8th Street, Manitowoc, Wisconsin 54220 (Just north of Bern-steins) <a href="tel:920-901-3752">920-901-3752</a></p>
-        <h4>Hours of Operation (Online/In-store):</h2>
-        <p>Call or Order Online.  Pick Up Only.</p>
-        <p>Opens Friday-Sunday at 5pm-9pm</p>
-    </div>
-</div>
+<div class="container">  
+    <section id="menu-section" class="row">
+        <header id="menu-header">
+            <img id="menu-logo" src="/img/menu_logo_02.png" alt="Menu Logo">
+        </header>
+        <div class="col s12 m6 l4">
+            <div class="card medium">
+                <div class="card-image">
+                    <img src="/img/pizza_04.jpg" alt="Shop Pizza Picture" class="responsive-img">
+                    <span class="card-title black-text">
+                        PIZZA
+                    </span>
+                </div>
+                <div class="card-content">
+                    Experience the best pizza you've ever had in your life!
+                </div>
+                <div class="card-action">
+                    <a href="/pizza">Shop Pizza</a>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l4">
+            <div class="card medium">
+                <div class="card-image">
+                    <img src="/img/chili_01.jpg" alt="Shop Chili" class="responsive-img">
+                    <span class="card-title black-text">
+                        CHILI
+                    </span>
+                </div>
+                <div class="card-content">
+                    Experience the best chili you've ever had in your life.
+                </div>
+                <div class="card-action">
+                    <a href="/chili">Chili</a>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l4">
+            <div class="card medium">
+                <div class="card-image">
+                    <img src="/img/soft_drink_01.jpg" alt="Shop Drinks" class="responsive-img">
+                    <span class="card-title">
+                        DRINKS
+                    </span>
+                </div>
+                <div class="card-content">
+                    Experience the best drink you've ever had in your life.
+                </div>
+                <div class="card-action">
+                    <a href="/drinks">Drinks</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<hr>
+    <div class="divider"></div>
 
-<div class="slideshow-container row">
-    <h1>About Riverside</h1>
-    <div class="slides slide col-sm-12 col-md-12">
-        <div class="numbertext">1 / 3</div>
-        <div class="text">Riverside Pizza</div>
-        <img src="img/riverside-pizza.jpg" alt="..." class="img-responsive" style="width: 100%">
-    </div>
-    <div class="slides slide col-sm-12 col-md-12">
-        <div class="numbertext">2 / 3</div>
-        <div class="text">We also serve cheese cakes!</div>
-        <img src="img/riverside-pizza3.jpg" alt="..." class="img-responsive" style="width: 100%">
-    </div>
-    <div class="slides slide col-sm-12 col-md-12">
-        <div class="numbertext">3 / 3</div>
-        <div class="text">Dine upstairs!</div>
-        <img src="img/riverside-pizza2.jpg" alt="..." class="img-responsive" style="width: 100%">
-    </div>
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a> 
-    <a class="next" onclick="plusSlides(1)">&#10095;</a> 
-    <div class="dot-container" style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-    </div>
+    <section id="location-section" class="row">
+        <div class="col s12 m8">
+            <h4>Location</h2>
+            <p>114 North 8th Street, Manitowoc, Wisconsin 54220 (Just north of Bern-steins) <a href="tel:920-901-3752">920-901-3752</a></p>
+            <h4>Hours of Operation (Online/In-store)</h2>
+            <p>Call or Order Online.  Pick Up Only.</p>
+            <p>Opens Friday-Sunday at 5pm-9pm</p>
+        </div>
+        <aside class="col s12 m4">
+            <div class="container">
+                <img src="/img/map_emblem_01.png" alt="Map Emblem">
+                <a href="https://goo.gl/maps/V9BwC5NM1Kp" target="_blank" class="btn waves-effect waves-light light-blue">
+                    <i class="material-icons left">map</i>
+                    Get Directions
+                </a>
+            </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="slideshow-section">
+        <h1>About Riverside</h1>        
+        <div id="carousel" class="carousel carousel-slider center">
+            <div class="carousel-item">
+                <img src="/img/riverside-pizza.jpg" alt="">
+            </div>
+            <div class="carousel-item">
+                <h4>We also serve cheese cakes!</h4>
+                <img src="/img/riverside-pizza3.jpg" alt="">
+            </div>
+            <div class="carousel-item">
+                <h4 class="white-text">Dine inside</h4>
+                <img src="/img/riverside-pizza2.jpg" alt="">
+            </div>
+        </div>
+    </section>
+
+    {{!-- <div class="slideshow-container row">
+        <div class="slides slide col-sm-12 col-md-12">
+            <div class="numbertext">1 / 3</div>
+            <div class="text">Riverside Pizza</div>
+            <img src="img/riverside-pizza.jpg" alt="..." class="img-responsive" style="width: 100%">
+        </div>
+        <div class="slides slide col-sm-12 col-md-12">
+            <div class="numbertext">2 / 3</div>
+            <div class="text">We also serve cheese cakes!</div>
+            <img src="img/riverside-pizza3.jpg" alt="..." class="img-responsive" style="width: 100%">
+        </div>
+        <div class="slides slide col-sm-12 col-md-12">
+            <div class="numbertext">3 / 3</div>
+            <div class="text">Dine upstairs!</div>
+            <img src="img/riverside-pizza2.jpg" alt="..." class="img-responsive" style="width: 100%">
+        </div>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a> 
+        <a class="next" onclick="plusSlides(1)">&#10095;</a> 
+        <div class="dot-container" style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </div> --}}
 </div>
 
 <script type="text/javascript" src="javascripts/home.js"></script>
