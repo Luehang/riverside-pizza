@@ -1,8 +1,10 @@
 {
   "name": "riverside-pizza-shopping",
   "version": "0.0.0",
-  "author": "lue_hang@hotmail.com",
-  "private": true,
+  "author": {
+    "name": "Lue Hang",
+    "email": "luehang17@gmail.com"
+  },
   "main": "app.js",
   "scripts": {
     "start": "nodemon ./bin/www"
