@@ -1,13 +1,16 @@
 # Riverside Pizza's Source Code
+
 This repository holds the source code to [https://www.manitowocsriversidepizza.com](https://www.manitowocsriversidepizza.com) that is built with
 **NodeJS/Express/MongoDB**.
 
 ## Found a bug?
-1. File an issue if none is issued.
-2. Fix and make a pull request.
+
+  1. File an issue if none is issued.
+  2. Fix and make a pull request.
 
 # Contributing
-We welcome any pull request from any Javascript developers.  Plus if you would like, your contribution will be shown on here.  Thank you.
+
+I welcome any pull request from any Javascript developers.  Plus if you would like, your contribution will be shown on here.  Thank you.
 
 ## Before you begin
 
@@ -23,10 +26,10 @@ We welcome any pull request from any Javascript developers.  Plus if you would l
 
 Perform steps 1-4:
 
-1. [Clone the repo](#1-clone-the-repo)
-2. [Add data to database](#2-add-data-to-database)
-3. [Edit files and create .env file](#3-edit-files-and-create-env-file)
-4. [Run the web application](#4-run-the-web-application)
+  1. [Clone the repo](#1-clone-the-repo)
+  2. [Add data to database](#2-add-data-to-database)
+  3. [Edit files and create .env file](#3-edit-files-and-create-env-file)
+  4. [Run the web application](#4-run-the-web-application)
 
 ### 1. Clone the repo
 
@@ -38,64 +41,69 @@ Perform steps 1-4:
 
 Navigate into the ``riverside-pizza/seed`` directory and run the following to add the necessary data...
 
-```
-$ node chili-seeder.js
-$ node drink-seeder.js
-$ node item-seeder.js
-$ node promo-seeder.js
-```
+  ```
+  $ cd riverside-pizza/seed
+  $ node chili-seeder.js
+  $ node drink-seeder.js
+  $ node item-seeder.js
+  $ node promo-seeder.js
+  ```
 
 Enter this for testing purposes...
 
-```
-$ node user-seeder.js
-```
+  ```
+  $ node user-seeder.js
+  ```
 
 ### 3. Edit files and create .env file
 
+* Find the main ``app.js`` file and skim through it to find the **development logger** for **debugging**.  Uncomment the highlighted code below.
+
+  ![](doc/source/images/dev-logger.png)
+
 * Navigate into ``public/javascripts/checkout.js`` and look above the javascript file.  You should see Stripe's "**setPublishableKey**."  Enter in your **publishable test key** here...
 
-![](doc/source/images/stripe-publishable-key-code.png)
+  ![](doc/source/images/stripe-publishable-key-code.png)
 
 * After that, locate the user's ``signup.hbs`` in ``views/user/`` and change Google's reCAPTCHA **publishable key** as shown here on this image.
 
-![](doc/source/images/recaptcha-publishable-key-code.png)
+  ![](doc/source/images/recaptcha-publishable-key-code.png)
 
 * Modify ``env.contributing``'s name to ``.env`` and populate the service
 credentials as you create the credentials:
 
-```
-# Stripe's API Key at https://www.stripe.com
-STRIPE_SECRET_KEY=<put Stripe's Secret Test Key here>
+  ```
+  # Stripe's API Key at https://www.stripe.com
+  STRIPE_SECRET_KEY=<put Stripe's Secret Test Key here>
 
-# Google's reCaptcha V2 API Key
-RECAPTCHA_SECRET_KEY=<put Google's reCaptcha Secret Key here>
-```
+  # Google's reCaptcha V2 API Key
+  RECAPTCHA_SECRET_KEY=<put Google's reCaptcha Secret Key here>
+  ```
 
 * Add an Admin user's ``_id`` by navigating into the the ``users`` **collection** in the ``riverside-pizza`` **database** as shown below.
 
-![](doc/source/images/admin-search.png)
+  ![](doc/source/images/admin-search.png)
 
-```
-# User's _id for admin account (obtain in MongoDB)
-ADMIN=<put User's _id here>
-```
+  ```
+  # User's _id for admin account (obtain in MongoDB)
+  ADMIN=<put User's _id here>
+  ```
 
-Add a **random phrase** for ``SESSION_SECRET``.
+* Add a **random phrase** for ``SESSION_SECRET``.
 
-```
-SESSION_SECRET=<put session secret phrase here>
-```
-
+  ```
+  SESSION_SECRET=<put session secret phrase here>
+  ```
 
 ### 4. Run the web application
 
 Enter the following while in the ``riverside-pizza/`` directory to run the app locally...
 
-```
-$ npm install
-$ npm start
-```
+  ```
+  $ npm install
+  $ npm start
+  ```
+
 Application will run default at **localhost:5000**...
 
 **Thank you for contributing and happy coding!**
