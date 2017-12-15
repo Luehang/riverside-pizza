@@ -3,7 +3,7 @@ const Schema                = mongoose.Schema;
 mongoose.Promise            = require('bluebird');
 
 const chiliSchema = new Schema({
-    imagePath: {type: String, default: "img/no-image.jpg"},
+    imagePath: {type: String, default: "/img/no-image.jpg"},
     title: {type: String, required: true},
     description: {type: String},
     select: {type: Array, required: true},
