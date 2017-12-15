@@ -7,7 +7,6 @@ mongoose.connect("mongodb://localhost/riverside-pizza", { useMongoClient: true }
 // data to add to mongo db
 const chilis = [
     new Chili({
-        imagePath: "img/no-image.png",
         title: 'Manitowoc Hometown Chili',
         description: '32 oz. only',
         select: [
@@ -18,7 +17,6 @@ const chilis = [
         ]
     }),
     new Chili({
-        imagePath: "img/no-image.png",
         title: 'Regular Chili',
         description: '16 or 32 oz.',
         select: [
@@ -47,7 +45,6 @@ const chilis = [
         ]
     }),
     new Chili({
-        imagePath: "img/no-image.png",
         title: 'Potato Chili',
         description: '16 or 32 oz.',
         select: [

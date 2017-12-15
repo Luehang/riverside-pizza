@@ -10,9 +10,9 @@
 
 # Contributing
 
-  I welcome any pull request from any Javascript developers.  Plus if you would like, your contribution will be shown on here.  Thank you.
+  I welcome any pull request from any Javascript developer.  Plus if you would like, your contribution will be shown on here.  Thank you.
 
-## Before you begin
+## Before you Begin
 
   * You must have the following prerequisites installed:
     * [Node.js](https://nodejs.org/) runtime (including the npm package manager)
@@ -26,18 +26,18 @@
 
 Perform steps 1-4:
 
-  1. [Clone the repo](#1-clone-the-repo)
-  2. [Add data to database](#2-add-data-to-database)
-  3. [Edit files and create .env file](#3-edit-files-and-create-env-file)
-  4. [Run the web application](#4-run-the-web-application)
+  1. [Clone the Repo](#1-clone-the-repo)
+  2. [Add Data to Database](#2-add-data-to-database)
+  3. [Edit Files and Create .env File](#3-edit-files-and-create-env-file)
+  4. [Run the Web Application](#4-run-the-web-application)
 
-### 1. Clone the repo
+### 1. Clone the Repo
 
   **Clone** `riverside-pizza` locally. In a terminal, run:
 
   `$ git clone https://github.com/Luehang/riverside-pizza.git riverside-pizza`
 
-### 2. Add data to database
+### 2. Add Data to Database
 
   Navigate into the ``riverside-pizza/seed`` directory and run the following to add the necessary data...
 
@@ -55,7 +55,7 @@ Perform steps 1-4:
   $ node user-seeder.js
   ```
 
-### 3. Edit files and create .env file
+### 3. Edit Files and Create .env File
 
   * Find the main ``app.js`` file and skim through it to find the **development logger** for **debugging**.  Uncomment the highlighted code below.
 
@@ -65,7 +65,7 @@ Perform steps 1-4:
 
     ![](doc/source/images/stripe-publishable-key-code.png)
 
-  * After that, locate the user's ``signup.hbs`` in ``views/user/`` and change Google's reCAPTCHA **publishable key** as shown here on this image.
+  * After that, locate the user's ``signup.hbs`` in ``views/user/`` and replace the present key with your own Google's reCAPTCHA **publishable key** as shown here on this image.
 
     ![](doc/source/images/recaptcha-publishable-key-code.png)
 
@@ -89,13 +89,13 @@ Perform steps 1-4:
     ADMIN=<put User's _id here>
     ```
 
-  * Add a **random phrase** for ``SESSION_SECRET``.
+  * Add a **random phrase** for the environment variable, ``SESSION_SECRET``.
 
     ```
     SESSION_SECRET=<put session secret phrase here>
     ```
 
-### 4. Run the web application
+### 4. Run the Web Application
 
   Enter the following while in the ``riverside-pizza/`` directory to run the app locally...
 
