@@ -4,14 +4,22 @@ html {
     background-color: rgb(247, 247, 247);
 }
 
-header {
-    font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
+.container {
+    width: 90% !important;
 }
 
-.brand-title {
+header {
+    /* font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI'; */
+}
+
+.brand-logo {
     font-family: 'Pacifico', 'cursive', 'Brush Script MT';
     font-size: 2.5em;
     transition: transform 100ms cubic-bezier(0.07, 1.09, 0.7, 1.51);;
+}
+
+.secondary-text-color {
+    color: #373737;
 }
 
 .brand-title:hover {
@@ -22,9 +30,13 @@ a .navbar-brand {
     color: green;
 }
 
+.dropdown-content li > a, .dropdown-content li > span {
+    color: #03A9F4 !important;
+}
+
 body {
-    font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
-    padding-top: 95px;
+    /* font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI'; */
+    /* padding-top: 95px; */
 }
 
 .body-container {
@@ -32,11 +44,59 @@ body {
 }
 
 h1 {
-    font-family: 'Russo One', 'Franklin Gothic Medium', 'Geneva';
+    /* font-family: 'Russo One', 'Franklin Gothic Medium', 'Geneva'; */
     color: rgb(46, 40, 40);
 }
 
-footer {
+/* I updated the footer */
+/* Page Footer styles */
+#page-footer {
+    margin-top: 50px;
+    position: relative;
+    background-image: url(../img/footer.png);
+    background-size: cover;
+    height: 150px;
+}
+
+#page-footer .col {
+    position: relative;
+    color: #AAA;
+}
+
+#page-footer ul {
+    position: absolute;
+    top: 65px;
+}
+
+#page-footer ul li {
+    display: inline-block;
+    text-transform: uppercase;
+    position: relative;
+    margin-right: 10px;
+}
+
+#page-footer ul li:last-of-type:after {
+    display: none;
+}
+
+#page-footer ul li:after {
+    content: "";
+    height: 16px;
+    width: 1px; 
+    background-color: #FFF !important;
+    display: inline-block;
+    position: absolute;
+    top: 2px;
+    right: -7px;
+}
+
+#page-footer .copyright {
+    position: absolute;
+    top: 80px;
+    right: 30px;
+}
+
+/* footer {
     background: repeating-linear-gradient(to top left,
     rgb(106, 207, 106), rgb(106, 207, 106) 5px, 
     rgb(247, 247, 247) 5px, rgb(247, 247, 247) 10px);
@@ -67,5 +127,22 @@ footer .info {
 @media (max-width: 767px) {
     footer .info {
         text-align: left;
+    }
+} */
+
+@media (max-width: 600px) {
+
+    /* Page Footer media query styles */
+    #page-footer ul {
+        margin-top: 10px !important;
+    }
+    
+    #page-footer ul, #page-footer .copyright {
+        position: relative;
+        width: 100%;
+        text-align: center;
+        display: block;
+        margin: auto;
+        right: unset;
     }
 }

@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/stylesheets/chili.css">
+<link rel="stylesheet" href="/stylesheets/pizza-shop.css">
 <style>
     .thumbnail img {
         max-height: 250px;
@@ -11,114 +12,215 @@
     }
 </style>
 
-<h1>PIZZA</h1>
+<div id="hero-container">
+    <aside>
+        <h3>Create Your Own Pizza</h3>
+    </aside>
+</div>
 
+<div class="container">
+    <div class="divider"></div>
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="thumbnail clearfix">
-                <form class="pull-left" style="width: 70%" action="/add-to-cart/id?model=pizza" method="POST">
-                    <div class="caption">
-                        <h3>Delicious Italian Pizza</h3>
-                        <p class="description">One topping thin and extra crispy pizza. $1.25 for extra topping.</p>
+        <div class="col m12 l8">
+            <form id="pizza-form" class="pull-left" style="width: 70%" action="/add-to-cart/id?model=pizza" method="POST">
+                <div class="caption">
+                    <h4>Create Your Own Delicious Italian Pizza</h4>
+                    <p class="description">One topping thin and extra crispy pizza. $1.25 for extra topping.</p>
+                </div>
+                <div class="input-field">
+                    <select name="pizza" id="pizza">
+                        <option class="truncate" value="small" selected>Small 1 topping $6.99</option>
+                        <option value="medium">Medium 1 topping $9.80</option>
+                        <option value="large">Large 1 topping $12.80</option>
+                    </select>
+                    <label>Choose your pizza</label>
+                </div>
+                {{!--
+                <div class="select-dropdown">
+                    <select id="pizza" name="pizza">
+                        <option value="small" selected>Small 1 topping $6.99</option>
+                        <option value="medium">Medium 1 topping $9.80</option>
+                        <option value="large">Large 1 topping $12.80</option>
+                    </select>
+                </div> --}}
+                <div class="input-field">
+                    <select id="pizza-topping" name="toppingOne">
+                        <option value="none">Empty $0.00</option>
+                        <option value="Italian Sausage" selected>Italian Sausage $0.00</option>
+                        <option value="Pepperoni">Pepperoni $0.00</option>
+                        <option value="Mushrooms">Mushrooms $0.00</option>
+                        <option value="Onions">Onions $0.00</option>
+                        <option value="Black Olives">Black Olives $0.00</option>
+                        <option value="Extra Cheese">Extra Cheese $0.00</option>
+                        <option value="Extra Sauce">Extra Sauce $0.00</option>
+                    </select>
+                    <label>Topping 1:</label>
+                </div>
+                <div class="input-field" data-startDisabled="true">
+                    <select id="pizza-topping" name="toppingTwo">
+                        <option value="none" selected>Empty $0.00</option>
+                        <option value="Italian Sausage">Italian Sausage $1.25</option>
+                        <option value="Pepperoni">Pepperoni $1.25</option>
+                        <option value="Mushrooms">Mushrooms $1.25</option>
+                        <option value="Onions">Onions $1.25</option>
+                        <option value="Black Olives">Black Olives $1.25</option>
+                        <option value="Extra Cheese">Extra Cheese $1.25</option>
+                        <option value="Extra Sauce">Extra Sauce $1.25</option>
+                    </select>
+                    <label>Choose a topping</label>
+                    <aside class="btn-aside-form-option">
+                        <span id="add-topping-btn" class="btn waves-effect waves-light light-green">
+                            <i class="material-icons">
+                                add
+                            </i>
+                        </span>
+                        <p>Add Topping</p>                        
+                    </aside>
+                    <aside class="btn-aside-form-option hide">
+                        <span class="btn waves-effect waves-light materialize-red remove-topping-btn">
+                            <i class="material-icons">
+                                delete
+                            </i>
+                        </span>
+                        <p>Remove</p>                        
+                    </aside>
+                </div>
+                <div class="input-field hide">
+                    <select id="pizza-topping" name="toppingThree">
+                        <option value="none" selected>Empty $0.00</option>
+                        <option value="Italian Sausage">Italian Sausage $1.25</option>
+                        <option value="Pepperoni">Pepperoni $1.25</option>
+                        <option value="Mushrooms">Mushrooms $1.25</option>
+                        <option value="Onions">Onions $1.25</option>
+                        <option value="Black Olives">Black Olives $1.25</option>
+                        <option value="Extra Cheese">Extra Cheese $1.25</option>
+                        <option value="Extra Sauce">Extra Sauce $1.25</option>
+                    </select>
+                    <label>Choose a topping</label>
+                    <aside class="btn-aside-form-option hide">
+                        <span class="btn waves-effect waves-light materialize-red remove-topping-btn">
+                            <i class="material-icons">
+                                remove
+                            </i>
+                        </span>
+                        <p>Remove</p>                        
+                    </aside>
+                </div>
+                <div class="input-field hide">
+                    <select id="pizza-topping" name="toppingFour">
+                        <option value="none" selected>Empty $0.00</option>
+                        <option value="Italian Sausage">Italian Sausage $1.25</option>
+                        <option value="Pepperoni">Pepperoni $1.25</option>
+                        <option value="Mushrooms">Mushrooms $1.25</option>
+                        <option value="Onions">Onions $1.25</option>
+                        <option value="Black Olives">Black Olives $1.25</option>
+                        <option value="Extra Cheese">Extra Cheese $1.25</option>
+                        <option value="Extra Sauce">Extra Sauce $1.25</option>
+                    </select>
+                    <label>Choose a topping</label>
+                    <aside class="btn-aside-form-option hide">
+                        <span class="btn waves-effect waves-light materialize-red remove-topping-btn">
+                            <i class="material-icons">
+                                remove
+                            </i>
+                        </span>
+                        <p>Remove</p>                        
+                    </aside>
+                </div>
+                <div class="input-field hide">
+                    <select id="pizza-topping" name="toppingFive">
+                        <option value="none" selected>Empty $0.00</option>
+                        <option value="Italian Sausage">Italian Sausage $1.25</option>
+                        <option value="Pepperoni">Pepperoni $1.25</option>
+                        <option value="Mushrooms">Mushrooms $1.25</option>
+                        <option value="Onions">Onions $1.25</option>
+                        <option value="Black Olives">Black Olives $1.25</option>
+                        <option value="Extra Cheese">Extra Cheese $1.25</option>
+                        <option value="Extra Sauce">Extra Sauce $1.25</option>
+                    </select>
+                    <label>Choose a topping</label>
+                    <aside class="btn-aside-form-option hide">
+                        <span class="btn waves-effect waves-light materialize-red remove-topping-btn">
+                            <i class="material-icons">
+                                remove
+                            </i>
+                        </span>
+                        <p>Remove</p>                        
+                    </aside>
+                </div>
+                <div class="input-field hide">
+                    <select id="pizza-topping" name="toppingSix">
+                        <option value="none" selected>Empty $0.00</option>
+                        <option value="Italian Sausage">Italian Sausage $1.25</option>
+                        <option value="Pepperoni">Pepperoni $1.25</option>
+                        <option value="Mushrooms">Mushrooms $1.25</option>
+                        <option value="Onions">Onions $1.25</option>
+                        <option value="Black Olives">Black Olives $1.25</option>
+                        <option value="Extra Cheese">Extra Cheese $1.25</option>
+                        <option value="Extra Sauce">Extra Sauce $1.25</option>
+                    </select>
+                    <label>Choose a topping</label>
+                    <aside class="btn-aside-form-option hide">
+                        <span class="btn waves-effect waves-light materialize-red remove-topping-btn">
+                            <i class="material-icons">
+                                remove
+                            </i>
+                        </span>
+                        <p>Remove</p>                        
+                    </aside>
+                </div>
+                <div class="input-field hide">
+                    <select id="pizza-topping" name="toppingSeven">
+                        <option value="none" selected>Empty $0.00</option>
+                        <option value="Italian Sausage">Italian Sausage $1.25</option>
+                        <option value="Pepperoni">Pepperoni $1.25</option>
+                        <option value="Mushrooms">Mushrooms $1.25</option>
+                        <option value="Onions">Onions $1.25</option>
+                        <option value="Black Olives">Black Olives $1.25</option>
+                        <option value="Extra Cheese">Extra Cheese $1.25</option>
+                        <option value="Extra Sauce">Extra Sauce $1.25</option>
+                    </select>
+                    <label>Choose a topping</label>
+                    <aside class="btn-aside-form-option hide">
+                        <span class="btn waves-effect waves-light materialize-red remove-topping-btn">
+                            <i class="material-icons">
+                                remove
+                            </i>
+                        </span>
+                        <p>Remove</p>                        
+                    </aside>
+                </div>
+                <button id="pizza-form-submit" type="submit" class="btn waves-effect waves-light light-blue" role="button">Add to Order</button>
+            </form>
+        </div>
+        <div class="col s12 l4">
+            <div id="receipt-container">
+                <h4>Pizza Order</h4>
+                <div class="divider"></div>
+                <div class="row">
+                    <div class="col s6">
+                        <h6>Description</h6>
+                        <ul id="description-list">
+                            <li>One Topping Pizza</li>
+                        </ul>
                     </div>
-                    <div class="styled-select">
-                        <select id="pizza" name="pizza">
-                            <option value="small" selected>Small 1 topping $6.99</option> 
-                            <option value="medium">Medium 1 topping $9.80</option>
-                            <option value="large">Large 1 topping $12.80</option>
-                        </select>
+                    <div class="col s6 border-left">
+                        <h6>Price</h6>
+                        <ul id="price-list">
+                            <li>$6.99</li>
+                        </ul>
                     </div>
-                    <div class="styled-select">
-                        <select id="pizza-topping" name="toppingOne">
-                            <option value="none">Empty $0.00</option>
-                            <option value="Italian Sausage" selected>Italian Sausage $0.00</option>
-                            <option value="Pepperoni">Pepperoni $0.00</option>
-                            <option value="Mushrooms">Mushrooms $0.00</option>
-                            <option value="Onions">Onions $0.00</option>
-                            <option value="Black Olives">Black Olives $0.00</option>
-                            <option value="Extra Cheese">Extra Cheese $0.00</option>
-                            <option value="Extra Sauce">Extra Sauce $0.00</option>
-                        </select>
+                </div>
+                <div id="total-row" class="row">
+                    <div class="col s6">
+                        <h6>Estimated Total</h6>                    
                     </div>
-                    <div class="styled-select">
-                        <select id="pizza-topping" name="toppingTwo">
-                            <option value="none" selected>Empty $0.00</option>
-                            <option value="Italian Sausage">Italian Sausage $1.25</option>
-                            <option value="Pepperoni">Pepperoni $1.25</option>
-                            <option value="Mushrooms">Mushrooms $1.25</option>
-                            <option value="Onions">Onions $1.25</option>
-                            <option value="Black Olives">Black Olives $1.25</option>
-                            <option value="Extra Cheese">Extra Cheese $1.25</option>
-                            <option value="Extra Sauce">Extra Sauce $1.25</option>
-                        </select>
+                    <div class="col s6">
+                        <span id="total">$6.99</span>
                     </div>
-                    <div class="styled-select">
-                        <select id="pizza-topping" name="toppingThree">
-                            <option value="none" selected>Empty $0.00</option>
-                            <option value="Italian Sausage">Italian Sausage $1.25</option>
-                            <option value="Pepperoni">Pepperoni $1.25</option>
-                            <option value="Mushrooms">Mushrooms $1.25</option>
-                            <option value="Onions">Onions $1.25</option>
-                            <option value="Black Olives">Black Olives $1.25</option>
-                            <option value="Extra Cheese">Extra Cheese $1.25</option>
-                            <option value="Extra Sauce">Extra Sauce $1.25</option>
-                        </select>
-                    </div>
-                    <div class="styled-select">
-                        <select id="pizza-topping" name="toppingFour">
-                            <option value="none" selected>Empty $0.00</option>
-                            <option value="Italian Sausage">Italian Sausage $1.25</option>
-                            <option value="Pepperoni">Pepperoni $1.25</option>
-                            <option value="Mushrooms">Mushrooms $1.25</option>
-                            <option value="Onions">Onions $1.25</option>
-                            <option value="Black Olives">Black Olives $1.25</option>
-                            <option value="Extra Cheese">Extra Cheese $1.25</option>
-                            <option value="Extra Sauce">Extra Sauce $1.25</option>
-                        </select>
-                    </div>
-                    <div class="styled-select">
-                        <select id="pizza-topping" name="toppingFive">
-                            <option value="none" selected>Empty $0.00</option>
-                            <option value="Italian Sausage">Italian Sausage $1.25</option>
-                            <option value="Pepperoni">Pepperoni $1.25</option>
-                            <option value="Mushrooms">Mushrooms $1.25</option>
-                            <option value="Onions">Onions $1.25</option>
-                            <option value="Black Olives">Black Olives $1.25</option>
-                            <option value="Extra Cheese">Extra Cheese $1.25</option>
-                            <option value="Extra Sauce">Extra Sauce $1.25</option>
-                        </select>
-                    </div>
-                    <div class="styled-select">
-                        <select id="pizza-topping" name="toppingSix">
-                            <option value="none" selected>Empty $0.00</option>
-                            <option value="Italian Sausage">Italian Sausage $1.25</option>
-                            <option value="Pepperoni">Pepperoni $1.25</option>
-                            <option value="Mushrooms">Mushrooms $1.25</option>
-                            <option value="Onions">Onions $1.25</option>
-                            <option value="Black Olives">Black Olives $1.25</option>
-                            <option value="Extra Cheese">Extra Cheese $1.25</option>
-                            <option value="Extra Sauce">Extra Sauce $1.25</option>
-                        </select>
-                    </div>
-                    <div class="styled-select">
-                        <select id="pizza-topping" name="toppingSeven">
-                            <option value="none" selected>Empty $0.00</option>
-                            <option value="Italian Sausage">Italian Sausage $1.25</option>
-                            <option value="Pepperoni">Pepperoni $1.25</option>
-                            <option value="Mushrooms">Mushrooms $1.25</option>
-                            <option value="Onions">Onions $1.25</option>
-                            <option value="Black Olives">Black Olives $1.25</option>
-                            <option value="Extra Cheese">Extra Cheese $1.25</option>
-                            <option value="Extra Sauce">Extra Sauce $1.25</option>
-                        </select>
-                    </div>
-                    <div class="clearfix">
-                        <button type="submit" class="btn btn-success pull-right" role="button">Add to Order</button>
-                    </div>
-                </form>
-                <div class="pull-right" style="width: 30%">
-                    <img src="/img/pizza6.jpg" alt="..." class="img-responsive">
                 </div>
             </div>
         </div>
     </div>
+</div>
+<script src="/javascripts/pizza-shop.js"></script>
