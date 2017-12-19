@@ -15,12 +15,15 @@
 ## Before you Begin
 
   * You must have the following prerequisites installed:
-    * [Node.js](https://nodejs.org/) runtime (including the npm package manager)
+    * [Node.js](https://nodejs.org/) runtime v7.7.4 or greater (including the npm package manager)
     * [MongoDB](https://docs.mongodb.com/v3.4/installation/) database
 
   * The following is not required to start up:
     * Have a [Stripe](https://stripe.com) account with a publishable API test key and secret API test key.  To register for a free Stripe account, go to https://dashboard.stripe.com/register.  Stripe handles online transactions.
     * Have a [Google reCAPTCHA](https://google.com/recaptcha/intro/android.html) account with a publishable API key and secret API key.  To register for a free Google reCaptcha account, go to https://www.google.com/recaptcha/intro/android.html.  Google reCAPTCHA is a free service that protects your website from spam and abuse.
+
+  * For testing check out and adding new orders:
+    * Try using the test card number 4242 4242 4242 4242, a random three-digit CVC number, any expiration date in the future, and a random five-digit U.S. ZIP code.
 
 ## Steps to Run Locally
 

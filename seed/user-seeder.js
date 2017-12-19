@@ -17,11 +17,11 @@ const users = [
         password: encryptPass('password')
     }),
     new User({
-        email: 'test1@test.com',
+        email: 'customer1@test.com',
         password: encryptPass('password')
     }),
     new User({
-        email: 'test2@test.com',
+        email: 'customer2@test.com',
         password: encryptPass('password')
     })
 ];
