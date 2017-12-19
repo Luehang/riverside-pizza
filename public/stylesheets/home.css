@@ -17,9 +17,9 @@ img:hover {
 }
 
 h1 {
-    /* font-family: 'Russo One', 'Franklin Gothic Medium', 'Geneva'; */
+    font-family: 'Russo One', 'Franklin Gothic Medium', 'Geneva';
     color: rgb(46, 40, 40);
-    /* padding-left: 15px; */
+    padding-left: 15px;
 }
 
 .deals-container {
@@ -197,11 +197,10 @@ h1 {
     transition: rgb(59, 161, 56) 0.6s ease;
 }
 
-
-/* .active, .dot:hover {
+.active, .dot:hover {
     background-color: rgb(87, 177, 64);
     opacity: 0.8;
-} */
+}
 
 /* slide animation */
 .slide {

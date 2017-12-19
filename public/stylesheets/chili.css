@@ -1,24 +1,25 @@
+.thumbnail {
+    padding: 15px;
+    border: 1px solid rgb(179, 216, 183);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
 
 .thumbnail img {
     max-height: 150px;
     margin: 0 auto;
 }
 
+.thumbnail .description {
+    color: #7f7f7f;
+}
+
 h3 {
     color: rgb(46, 40, 40);
-    margin-top: 10px;
-    margin-bottom: -15px !important;
+    margin-top: 0;
 }
 
-p {
-    font-size: 1.25em;
-    font-weight: 300;
-    color: #272727 !important;
-    margin-bottom: 50px !important;
-}
-
-.row {
-    
+.caption {
+    font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
 }
 
 .styled-select {
@@ -34,22 +35,6 @@ p {
     border: 1px solid rgb(179, 216, 183);
 }
 
-.input-field {
-    margin-top: 40px !important;
-}
-
-.input-field label {
-    font-size: 0.9em;
-    color: #888 !important;
-}
-
-form {
-    background-color: #FFFFFF;
-    padding: 20px 60px 40px 20px;
-    box-shadow: 1px 1px 2px #BBB;
-    width: 100% !important;
-}
-
 select {
     font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
     color: rgb(46, 40, 40);
@@ -62,17 +47,16 @@ select {
     cursor: pointer;
 }
 
-.dropdown-content {
-    top: 45px !important;
+.thumbnail button {
+    font-family: 'Fredoka One', 'Arial Rounded MT Bold', 'Segoe UI';
+    margin-top: 5px;
+    width: 100%;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    transition: transform 100ms ease-in-out;
 }
 
-.dropdown-content li {
-    min-height: 36px !important;
-    height: 30px !important;
+.thumbnail button:hover {
+    transform: scale(1.03);
 }
-
-.dropdown-content li span {
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
-}
-

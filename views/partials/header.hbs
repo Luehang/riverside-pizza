@@ -1,58 +1,19 @@
 <style>
-    .fixed { /* Used for the advertise lines */
-        display: block;
-        position: fixed;
-        width: 100%;
-        z-index: 994; /* Should be over must of the content besides the side-nav on mobile. */
-    }
     .advertise-line {
         text-align: center;
-        background-color: #474747;
-        line-height: 24px;
-    }
-    nav {
-        background-color: #8BC34A; /* I gave the nav a bg color, idk if I'll keep it this color though. */
-    }
-    nav .badge, .side-nav .badge {
-        min-width: 18px !important; /* Override Materializes' value to let the content set the width */
-        border-radius: 2px;
-        color: #272727;
-        margin-bottom: -6px; /* Makes the badge center on the y-axis */
-    }
-    nav .active {
-        /* change the colors on the active drop down menus and tabs */
-        background-color: #FFFFFF !important;
-        color: #272727;
-    }
-    .side-nav {
-        color: #272727;
-    }
-    .side-nav .collapsible-body a, .side-nav .collapsible-body .material-icons {
-        /* Sets the color of the links and the icons to blue for the collapsible-body. */
-        color: #03a9f4 !important;
-    }
-    .dropdown-button {
-        cursor: pointer;
-    }
-    nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
-        line-height: 64px; /* This centers the icons on the y-axis, although it sill doesn't look center compared to the text. */
-        margin-right: 6px;
-    }
-    .navbar-fixed {
-        padding-top: 22px; /* Moves the navbar down to show the advertise lines */
+        background-color: rgb(84, 187, 84);
     }
     .lines {
         display: none;
         min-height: 22px;
-        /* background-color: rgb(84, 187, 84); */
+        background-color: rgb(84, 187, 84);
         position: absolute;
         width: 100%;
         top: 0;
-        color: #DEDEDE;
     }
     .initial-line {
         min-height: 22px;
-        /* background-color: rgb(84, 187, 84); */
+        background-color: rgb(84, 187, 84);
     }
     .initial {
         display: block;
@@ -73,158 +34,76 @@
     }
 </style>
 
-<!-- Materializes' mobile side menu -->
-{{!-- 
-    Note that this is outside of our nav tag I've done this so 
-    when the toggle menu is clicked/touched this content
-    will appear to be above the nav-header. Otherwise the z-index
-    on the overlay will cover the side-nav.
- --}}
-<nav class="side-nav" id="mobile_side_nav" style="padding-bottom: 24px;">
-    <ul class="collapsible" data-collapsible="accordion">
-        <li>
-            <div class="collapsible-header">
-                <i class="material-icons left">restaurant_menu</i>
-                MENU
-                <i class="material-icons right" style="margin-left: 0px">arrow_drop_down</i>
-            </div> 
-            <div class="collapsible-body">
-                <ul>
-                    <li><a href="/deals">
-                        <i class="material-icons">local_offer</i> DEALS
-                    </a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="/pizza">
-                        <i class="material-icons">local_pizza</i> PIZZA
-                    </a></li>
-                    <li><a href="/chili">
-                        {{!-- I made an icon because I couldn't find any soup icons in the Material Icons --}}
-                        <img class="left" style="border: none; box-shadow: none; width: 24px; margin: 10px 32px 0 0" src="/img/icons/chilli_icon.png"></img> CHILI
-                    </a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="/drinks">
-                        <i class="material-icons">local_drink</i> DRINKS
-                    </a></li>
-                </ul>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">
-                <i class="material-icons left" aria-hidden="true">person</i>
-                User Management
-                <i class="material-icons right" style="margin-left: 0px">arrow_drop_down</i>
-            </div>
-            <div class="collapsible-body">
-                <ul>
-                    {{# if admin }}
-                        <li><a href="/user/profile">Admin Profile</a></li>
-                        <li><a href="/admin/customerhistory">Customer History</a></li>
-                        <li><a href="/admin/user-accounts">User Accounts</a></li>
-                        {{!-- <li><a href="#">Customer Feedback</a></li> --}}
-                        <li role="separator" class="divider"></li>
-                        <li><a href="/user/logout">Logout</a></li>
-                    {{ else if login }}
-                        <li><a href="/user/profile">User Profile</a></li>
-                        <li><a href="/user/orderhistory">Order History</a></li>
-                        {{!-- <li><a href="#">Real-time Feedback</a></li> --}}
-                        <li role="separator" class="divider"></li>
-                        <li><a href="/user/logout">Logout</a></li>
-                    {{ else }}
-                        <li><a href="/user/signup">Sign up</a></li>
-                        <li><a href="/user/signin">Sign in</a></li>
-                    {{/if}}
-                </ul>
-            </div>
-        </li>
-        <li>
-            <a href="/shopping-cart" class="black-text" style="padding-left: 20px">
-                <i class="material-icons left black-text">shopping_cart</i>
-                Order/s
-                <span class="badge grey" data-badge-caption="">{{session.cart.totalQty}}</span>
-            </a>
-        </li>
-    </ul>
-</nav> <!-- Mobile Nav -->
-
-{{!-- 
-    Moved the advertise-lines outside of the nav so we
-    can use the defaults heights from materializes' nav.
-    Using the defualts makes the nav look cleaner with less effort.
- --}}
-<div class="advertise-line fixed">
-    <div class="initial-line line-fade col-sm-12 col-md-12"></div>
-    <div class="initial lines line-fade col-sm-12 col-md-12">
-        {{!-- Added a truncate class to keep the longer lines from overflowing the nav bar. --}}
-        <div class="line-text truncate">15OFF for 15% off orders 5 dollars and over.</div>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="advertise-line">
+        <div class="initial-line line-fade col-sm-12 col-md-12"></div>
+        <div class="initial lines line-fade col-sm-12 col-md-12">
+            <div class="line-text">15OFF for 15% off orders 5 dollars and over.</div>
+        </div>
+        <div class="lines line-fade col-sm-12 col-md-12">
+            <div class="line-text">Look for flyer for 50% off in-store.</div>
+        </div>
+        <div class="lines line-fade col-sm-12 col-md-12">
+            <div class="line-text">Hurry! Expires soon!</div>
+        </div>
     </div>
-    <div class="lines line-fade col-sm-12 col-md-12">
-        <div class="line-text">Look for flyer for 50% off in-store.</div>
-    </div>
-    <div class="lines line-fade col-sm-12 col-md-12">
-        <div class="line-text">Hurry! Expires soon!</div>
-    </div>
-</div>
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand-title navbar-brand" href="/">Riverside Pizza</a>
+        </div>
 
-<div class="navbar-fixed">
-    <nav>
-        <div class="nav-wrapper">
-            <div class="container">
-                <a href="#" class="button-collapse right" data-activates="mobile_side_nav">
-                    <i class="material-icons">menu</i>
-                </a>
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="left">
-                    <a class="brand-logo" style="position: relative" href="/">Riverside Pizza</a>
-                </div>
-
-                <div class="dropdown-button left hide-on-med-and-down" style="margin-left: 30px; padding-left: 10px" data-activates="bs-example-navbar-collapse-1" data-constrainwidth="false" data-beloworigin="true">
-                    <i class="material-icons left">restaurant_menu</i>                    
-                    MENU
-                    <i class="material-icons right" style="margin-left: 0px">arrow_drop_down</i>
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="dropdown-content" style="margin-left: 30px;" id="bs-example-navbar-collapse-1">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-bars" aria-hidden="true"></i> MENU <span class="caret"></span>
+                    </a>
                     <ul class="dropdown-menu">
                         <li><a href="/deals">
-                            <i class="material-icons">local_offer</i> DEALS
+                            <i class="fa fa-envelope" aria-hidden="true"></i> DEALS
                         </a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="/pizza">
-                            <i class="material-icons">local_pizza</i> PIZZA
+                            <i class="fa fa-cutlery" aria-hidden="true"></i> PIZZA
                         </a></li>
                         <li><a href="/chili">
-                            {{!-- I made an icon because I couldn't find any soup icons in the Material Icons --}}
-                            <img class="left" style="border: none; box-shadow: none; width: 24px; margin-right: 24px" src="/img/icons/chilli_icon.png"></img> CHILI
+                            <i class="fa fa-cutlery" aria-hidden="true"></i> CHILI
                         </a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="/drinks">
-                            <i class="material-icons">local_drink</i> DRINKS
+                            <i class="fa fa-glass" aria-hidden="true"></i> DRINKS
                         </a></li>
                     </ul>
-                </div>
-                <ul class="right hide-on-med-and-down">
-                    {{!-- {{# if admin }}
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-address-card-o" aria-hidden="true"></i>
-                                <span class="badge"></span>
-                            </a>
-                        </li>
-                    {{/if}} --}}
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {{!-- {{# if admin }}
                     <li>
-                        <a href="/shopping-cart">
-                            <i class="material-icons left">shopping_cart</i>
-                            Order/s
-                            <span class="badge grey" data-badge-caption="">{{session.cart.totalQty}}</span>
+                        <a href="#">
+                            <i class="fa fa-address-card-o" aria-hidden="true"></i>
+                            <span class="badge"></span>
                         </a>
                     </li>
-                    <li class="dropdown-button" data-activates="user_management_dropdown" data-constrainwidth="false" data-beloworigin="true" style="padding-right: 10px;">
-                        <i class="material-icons left" aria-hidden="true">person</i>
-                        User Management
-                        <i class="material-icons right" style="margin-left: 0px">arrow_drop_down</i>
-                    </li>
-                    <ul id="user_management_dropdown" class="dropdown-content">
+                {{/if}} --}}
+                <li>
+                    <a href="/shopping-cart">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Order/s
+                        <span class="badge">{{session.cart.totalQty}}</span>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user" aria-hidden="true"></i> User Management <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
                         {{# if admin }}
                             <li><a href="/user/profile">Admin Profile</a></li>
                             <li><a href="/admin/customerhistory">Customer History</a></li>
@@ -242,16 +121,16 @@
                             <li><a href="/user/signup">Sign up</a></li>
                             <li><a href="/user/signin">Sign in</a></li>
                         {{/if}}
-                    </ul> <!-- user_management_dropdown -->
-                </ul> <!-- Right desktop link group -->
-            </div> <!-- container -->
-        </div> <!-- nav-wrapper -->
-    </nav> <!-- desktop nav -->
-</div> <!-- navbar-fixed -->
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
 
 <script>
     let lineIndex = 0;
-    
+
     function manualLines(n) {
         var i;
         var slides = document.getElementsByClassName("lines");
