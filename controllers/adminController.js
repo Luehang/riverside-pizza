@@ -7,6 +7,7 @@ const Order                 = require('../models/Order');
 const Cart                  = require('../models/Cart');
 const User                  = require('../models/User');
 const Profile               = require('../models/Profile');
+const Drink                 = require('../models/Drink');
 
 // controllers
 const functionController    = require('../controllers/functionController');
@@ -369,6 +370,15 @@ adminController.deleteUserAccountPerm = (req, res) => {
             });
         });
     });
+}
+
+adminController.getDrinksPage =  (req,res) => {
+    Drink.find({}, function (err, drinks) {
+        if (err) throw err;
+        res.render('admin/drinks-table', {
+            drinks: drinks
+        })
+    })
 }
 
 module.exports = adminController;
